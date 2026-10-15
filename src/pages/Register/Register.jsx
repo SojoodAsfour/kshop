@@ -1,5 +1,4 @@
 import React from 'react'
-import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Button, TextField } from '@mui/material';
@@ -100,7 +99,7 @@ export default function Register() {
           <Box sx={{ borderRadius: '50%', bgcolor: 'primary.main', color: "white", display: "flex", alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px' }}>
             k
           </Box>
-          <Typography variant="h4" component="h1" sx={{ fontFamily: 'Georgia, serif', fontsize: { xs: '16px', md: '20px' }, fontWeight: 'bold' }}>
+          <Typography variant="h3" component="h2" sx={{ fontFamily: 'Georgia, serif', fontSize: { xs: '16px', md: '20px' }, fontWeight: 'bold' }}>
             Kashop
           </Typography>
         </Box>
@@ -154,7 +153,7 @@ export default function Register() {
       <Box sx={{ width: { xs: '100%', md: '45%' }, bgcolor: 'white', p: { xs: 3, md: 5 }, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Box sx={{ width: '100%', maxWidth: '420px' }}>
 
-          <Typography variant="h4" component="h1">
+          <Typography variant="h4" component="h2">
             Create Your Account
           </Typography>
           {serverError ? <Alert severity="error" sx={{ mt: 2 }}>{serverError}</Alert> : null}
