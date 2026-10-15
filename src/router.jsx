@@ -4,6 +4,9 @@ import AuthLayout from "./Layouts/AuthLayout";
 import Home from "./pages/Home/Home.jsx";
 import Login from "./pages/Login/Login.jsx";
 import Register from "./pages/Register/Register.jsx";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
+import OTPVerification from "./pages/OTPVerification/OTPVerification.jsx";
+import ResetPassword from "./pages/ResetPassword/ResetPassword.jsx";
 
 const router = createBrowserRouter([
     {
@@ -30,9 +33,21 @@ const router = createBrowserRouter([
             {
                 path: "register",
                 element: <Register />
+            },
+            {
+                path: "forgot-password",
+                element: <ForgotPassword />
+            },
+            {
+                path: "verify-otp",
+                element: <OTPVerification />
+            },
+            {
+                path: "reset-password",
+                element: <ResetPassword />
             }
         ]
     }
 ]);
 
-export {router};
+export { router };
