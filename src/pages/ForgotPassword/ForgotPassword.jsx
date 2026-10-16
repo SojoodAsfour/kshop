@@ -23,7 +23,7 @@ export default function ForgotPassword() {
   try {
     const response = await axios.post("https://knowledgeshop.runasp.net/api/auth/Account/SendCode",data );
 
-    navigate("/verify-otp", {state: { email: data.email } });
+    navigate("/reset-password", {state: { email: data.email } });
 
   } catch (err) {
     setServerError("Unable to send the code. Please try again.");

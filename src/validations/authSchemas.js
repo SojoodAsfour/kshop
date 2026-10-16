@@ -41,3 +41,16 @@ export const otpSchema = yup.object({
     .required("Verification code is required")
     .matches(/^\d{4}$/, "Verification code must be exactly 4 digits")
 });
+
+export const resetPasswordSchema = yup.object({
+  newPassword: yup.string()
+    .required("New Password is required")
+    .min(8, "Password must be at least 8 characters")
+    .matches(/[A-Z]/, "Password must contain an uppercase letter")
+    .matches(/[0-9]/, "Password must contain a number")
+    .matches(/[^a-zA-Z0-9]/, "Password must contain a symbol"),
+
+  confirmPassword: yup.string()
+    .required("Confirm Password is required")
+    .oneOf([yup.ref('newPassword')], "Passwords must match")
+});
