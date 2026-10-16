@@ -35,3 +35,9 @@ export const loginSchema = yup.object({
 export const forgotPasswordSchema = yup.object({
   email: yup.string().required("Email is required").email("Invalid email format")
 });
+
+export const otpSchema = yup.object({
+  code: yup.string()
+    .required("Verification code is required")
+    .matches(/^\d{4}$/, "Verification code must be exactly 4 digits")
+});
