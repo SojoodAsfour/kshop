@@ -1,14 +1,8 @@
 import React from 'react'
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Button, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { registerSchema } from '../../validations/authSchemas';
-import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import CustomButton from '../../components/ui/CustomButton';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
@@ -16,32 +10,12 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import useRegister from '../../hooks/useRegister';
 
 
 
 export default function Register() {
-  const navigate = useNavigate();
-
-  const [serverError, setServerError] = useState(null);
-  const [success, setSuccess] = useState(false);
-
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
-    resolver: yupResolver(registerSchema),
-    mode: "onBlur"
-  })
-
-  const onsubmit = async (data) => {
-    try {
-      const response = await axios.post("https://knowledgeshop.runasp.net/api/auth/Account/Register", data);
-      setSuccess(true);
-      navigate("/login");
-
-    } catch (err) {
-      console.error(err.response);
-      setServerError("An error occurred while registering. Please try again.");
-    }
-  }
-
+  const { register,handleSubmit,errors,isSubmitting,serverError,onsubmit} = useRegister();
   const benefits = [
     {
       id: 1,
