@@ -1,14 +1,8 @@
 import React from 'react'
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Button, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { loginSchema } from '../../validations/authSchemas';
-import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import CustomButton from '../../components/ui/CustomButton';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -17,29 +11,12 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import WineBarIcon from '@mui/icons-material/WineBar';
 import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
+import useLogin from '../../hooks/useLogin';
+
 
 export default function Login() {
 
-  const navigate = useNavigate();
-
-  const [serverError, setServerError] = useState(null);
-
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
-    resolver: yupResolver(loginSchema),
-    mode: "onBlur"
-  })
-
-  const onsubmit = async (data) => {
-    setServerError(null);
-    try {
-      const response = await axios.post("https://knowledgeshop.runasp.net/api/auth/Account/Login", data);
-      navigate("/home");
-
-    } catch (err) {
-      console.error(err.response?.status);
-      setServerError("Invalid email or password. Please try again.");
-    }
-  }
+  const {register,handleSubmit,errors,isSubmitting,serverError,onsubmit} = useLogin();
 
   const inputStyle = {
     '& .MuiOutlinedInput-root': {
@@ -77,7 +54,8 @@ export default function Login() {
 
       <Box sx={{
         width: { xs: '100%', md: '55%' }, boxSizing: 'border-box', bgcolor: 'secondary.main', p: { xs: 3, md: 6 }, minHeight: { xs: 'auto', md: '100vh' }, boxSizing: 'border-box',
-        display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
+        display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'
+      }}>
         <Box sx={{ display: "flex", alignItems: 'center', gap: 1 }}>
           <Box sx={{
             borderRadius: '50%', bgcolor: 'primary.main', color: "white", display: "flex", alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', flexShrink: 0
@@ -90,7 +68,7 @@ export default function Login() {
         </Box>
 
         <Box>
-          <Typography component="h1" sx={{ fontSize: { xs: '20px', md: '40px' }, fontWeight: 'bold',  mt: { xs: 5, md: 10 },maxWidth: '500px', lineHeight: 1.2 }}>
+          <Typography component="h1" sx={{ fontSize: { xs: '20px', md: '40px' }, fontWeight: 'bold', mt: { xs: 5, md: 10 }, maxWidth: '500px', lineHeight: 1.2 }}>
             Curated Acquisitions Await.
           </Typography>
 
@@ -163,7 +141,7 @@ export default function Login() {
                   }}
                 />
                 <TextField placeholder="e.g. lady.vivienne.claire@example.com" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('email')}
-                  error={errors.email} helperText={errors.email?.message}></TextField>
+                  error={!!errors.email} helperText={errors.email?.message}></TextField>
               </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
@@ -183,7 +161,7 @@ export default function Login() {
                   }}
                 />
                 <TextField placeholder="Enter your password" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('password')}
-                  error={errors.password} helperText={errors.password?.message} type='password'></TextField>
+                  error={!!errors.password} helperText={errors.password?.message} type='password'></TextField>
               </Box>
             </Box>
             <Box sx={{
@@ -222,7 +200,7 @@ export default function Login() {
             </CustomButton>
 
             <Typography variant="body2" color="textSecondary" align="center" sx={{ mt: 2, fontFamily: 'Georgia, serif' }}>
-              New to Kashop?  <Box component={Link} to="/register" sx={{color: 'primary.main',textDecoration: 'none',fontWeight: 600,}}>Create an Account</Box>
+              New to Kashop?  <Box component={Link} to="/register" sx={{ color: 'primary.main', textDecoration: 'none', fontWeight: 600, }}>Create an Account</Box>
             </Typography>
 
           </Box>
