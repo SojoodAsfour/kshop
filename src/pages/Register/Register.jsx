@@ -150,7 +150,7 @@ export default function Register() {
                     pointerEvents: 'none'
                   }} />
                 <TextField placeholder="e.g. Lady Vivienne Claire" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('fullName')}
-                  error={errors.fullName} helperText={errors.fullName?.message}></TextField>
+                  error={!!errors.fullName} helperText={errors.fullName?.message}></TextField>
               </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
@@ -170,7 +170,7 @@ export default function Register() {
                   }}
                 />
                 <TextField placeholder="Enter your username" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('userName')}
-                  error={errors.userName} helperText={errors.userName?.message}></TextField>
+                  error={!!errors.userName} helperText={errors.userName?.message}></TextField>
               </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
@@ -190,7 +190,7 @@ export default function Register() {
                   }}
                 />
                 <TextField placeholder="e.g. lady.vivienne.claire@example.com" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('email')}
-                  error={errors.email} helperText={errors.email?.message}></TextField>
+                  error={!!errors.email} helperText={errors.email?.message}></TextField>
               </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
@@ -210,7 +210,7 @@ export default function Register() {
                   }}
                 />
                 <TextField placeholder="e.g. 050-123-4567" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('phoneNumber')}
-                  error={errors.phoneNumber} helperText={errors.phoneNumber?.message}></TextField>
+                  error={!!errors.phoneNumber} helperText={errors.phoneNumber?.message}></TextField>
               </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
@@ -230,7 +230,7 @@ export default function Register() {
                   }}
                 />
                 <TextField placeholder="Create a strong password" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('password')}
-                  error={errors.password} helperText={errors.password?.message} type='password'></TextField>
+                  error={!!errors.password} helperText={errors.password?.message} type='password'></TextField>
               </Box>
             </Box>
 
