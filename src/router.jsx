@@ -7,6 +7,7 @@ import Register from "./pages/Register/Register.jsx";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
 import OTPVerification from "./pages/OTPVerification/OTPVerification.jsx";
 import ResetPassword from "./pages/ResetPassword/ResetPassword.jsx";
+import ProductDetails from "./pages/ProductDetails.jsx";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             {
                 path: "home",
                 element: <Home />
+            },
+            {
+                path: "products/:id",
+                element: <ProductDetails />
             }
         ]
     },
