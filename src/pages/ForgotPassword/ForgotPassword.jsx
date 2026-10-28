@@ -11,6 +11,7 @@ import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 export default function ForgotPassword() {
+  
   const { register, handleSubmit, errors, isSubmitting, serverError, onsubmit } = useForgotPassword();
 
   return (
@@ -148,9 +149,7 @@ export default function ForgotPassword() {
             </Typography>
           </Box>
 
-
         </Box>
-
       </Box>
     </Box>
   );
