@@ -5,10 +5,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { loginSchema } from '../validations/authSchemas';
+import { useAuthStore } from '../store/useAuthStore';
+
 
 export default function useLogin() {
 
   const navigate = useNavigate();
+  const login = useAuthStore((state) => state.login);
   const [serverError, setServerError] = useState(null);
   const {register,handleSubmit,formState: { errors, isSubmitting }} = useForm({
     resolver: yupResolver(loginSchema),
@@ -19,7 +22,8 @@ export default function useLogin() {
     setServerError(null);
     try {
 
-      await axios.post('https://knowledgeshop.runasp.net/api/auth/Account/Login',data);
+      const response = await axios.post('https://knowledgeshop.runasp.net/api/auth/Account/Login',data);
+      login(response.data.accessToken);
       navigate('/home');
 
     } catch (err) {

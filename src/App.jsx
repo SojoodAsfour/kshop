@@ -14,9 +14,9 @@ const queryClient = new QueryClient()
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+         <ThemeProvider theme={theme}>
+           <RouterProvider router={router} />
+         </ThemeProvider>
     </QueryClientProvider>
   );
 }
