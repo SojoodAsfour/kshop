@@ -8,6 +8,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query'
+import { ToastContainer } from 'react-toastify';
 
 const queryClient = new QueryClient()
 
@@ -16,6 +17,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
          <ThemeProvider theme={theme}>
            <RouterProvider router={router} />
+           <ToastContainer />
          </ThemeProvider>
     </QueryClientProvider>
   );
