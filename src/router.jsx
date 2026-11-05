@@ -8,6 +8,7 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
 import OTPVerification from "./pages/OTPVerification/OTPVerification.jsx";
 import ResetPassword from "./pages/ResetPassword/ResetPassword.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
+import Cart from "./pages/Cart/Cart.jsx";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: "products/:id",
                 element: <ProductDetails />
+            },
+            {
+                path:"cart",
+                element:<Cart />
             }
         ]
     },
