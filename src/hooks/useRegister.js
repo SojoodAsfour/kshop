@@ -3,9 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
-
 import { registerSchema } from '../validations/authSchemas';
+import axiosInstance from '../api/axiosInstance';
 
 export default function useRegister() {
 
@@ -21,7 +20,7 @@ export default function useRegister() {
   const onsubmit = async (data) => {
     setServerError(null);
     try {
-      await axios.post("https://knowledgeshop.runasp.net/api/auth/Account/Register",data);
+      await axiosInstance.post("/auth/Account/Register", data);
       navigate("/login");
     } catch (err) {
       console.error(err.response);

@@ -1,20 +1,12 @@
 import React from 'react'
-import axios from 'axios';
-import { useAuthStore } from '../store/useAuthStore';
 import { useMutation } from '@tanstack/react-query';
-
+import authAxiosInstance from '../api/authAxiosInstace';
 
 export default function useAddToCard() {
     
-    const token = useAuthStore((state) => state.token);
     const addToCard = async (productId) => {
-        const response = await axios.post('https://knowledgeshop.runasp.net/api/Carts',
-            { ProductId: productId, Count: 1 }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            return response.data;
+        const response = await authAxiosInstance.post('/Carts', {productId: productId,Count:1}); 
+        return response.data;
     }
     return (
         useMutation({

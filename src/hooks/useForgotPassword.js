@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 import { forgotPasswordSchema } from '../validations/authSchemas';
+import axiosInstance from '../api/axiosInstance';
 
 export default function useForgotPassword() {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function useForgotPassword() {
     const onsubmit = async (data) => {
         setServerError(null);
         try {
-            await axios.post("https://knowledgeshop.runasp.net/api/auth/Account/SendCode", data);
+            await axiosInstance.post("/auth/Account/SendCode", data);
             navigate("/reset-password", {
                 state: { email: data.email }
             });

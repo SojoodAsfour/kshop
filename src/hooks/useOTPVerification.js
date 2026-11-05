@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { otpSchema } from '../validations/authSchemas';
+import axiosInstance from '../api/axiosInstance';
 
 export default function useOTPVerification(email, newPassword, onBack) {
 
@@ -23,12 +24,11 @@ export default function useOTPVerification(email, newPassword, onBack) {
         setServerError(null);
         try {
 
-            await axios.patch("https://knowledgeshop.runasp.net/api/auth/Account/ResetPassword", {
+            await axiosInstance.patch("/auth/Account/ResetPassword", {
                 email: email,
                 code: data.code,
                 newPassword: newPassword
-            }
-            );
+            });
             setSuccess(true);
 
         } catch (err) {
