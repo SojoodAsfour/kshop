@@ -2,10 +2,14 @@ import { Box, IconButton, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import useUpdateCartItem from '../../hooks/useUpdateCartItem';
 import RemoveIcon from '@mui/icons-material/Remove';
+import useRemoveItemCart from '../../hooks/useRemoveItemCart';
+import { toast } from 'react-toastify';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function CartItem({ item }) {
 
   const { mutate: updateCartItem, isPending } = useUpdateCartItem();
+  const { mutate: removeItemCart , isPending: isRemovePending } = useRemoveItemCart();
   const handleIncrease = () => {
     updateCartItem({ productId: item.productId, count: item.count + 1 });
   };
@@ -14,6 +18,18 @@ export default function CartItem({ item }) {
       updateCartItem({ productId: item.productId, count: item.count - 1 });
     }
   };
+
+  const handleRemove = () => {
+    removeItemCart(item.productId);
+    onSuccess: () => {
+      toast.success('Item removed from cart');
+    }
+
+    onError: (error) => {
+      toast.error('Failed to remove item from cart');
+    }
+  };
+
   return (
     <Paper sx={{ p: 2, mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <Box>
@@ -32,6 +48,10 @@ export default function CartItem({ item }) {
       </Box>
 
       <Typography >Total: ${item.totalPrice}</Typography>
+
+      <IconButton onClick={handleRemove} disabled={isRemovePending}>
+        <DeleteIcon />
+      </IconButton>
     </Paper>
   );
 }
