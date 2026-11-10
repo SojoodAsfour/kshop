@@ -6,9 +6,9 @@ import theme from './theme';
 import {
   QueryClient,
   QueryClientProvider,
-  useQuery,
 } from '@tanstack/react-query'
 import { ToastContainer } from 'react-toastify';
+import { CssBaseline } from '@mui/material';
 
 const queryClient = new QueryClient();
 
@@ -16,6 +16,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
          <ThemeProvider theme={theme}>
+          <CssBaseline />
            <RouterProvider router={router} />
            <ToastContainer />
          </ThemeProvider>

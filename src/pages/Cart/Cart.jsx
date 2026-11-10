@@ -57,6 +57,7 @@ export default function Cart() {
             display: 'grid',
             gridTemplateColumns: { xs: '1fr', md: '2fr 1fr' },
             gap: 4,
+            backgroundColor: 'brand.main',
         }}>
             <Box>
                 {data?.items?.map((item) => (
