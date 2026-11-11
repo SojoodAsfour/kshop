@@ -9,6 +9,8 @@ import OTPVerification from "./pages/OTPVerification/OTPVerification.jsx";
 import ResetPassword from "./pages/ResetPassword/ResetPassword.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
 import Cart from "./pages/Cart/Cart.jsx";
+import Products from './components/Products/Products';
+import Categories from './components/Categories/Categories';
 
 const router = createBrowserRouter([
     {
@@ -28,9 +30,17 @@ const router = createBrowserRouter([
                 element: <ProductDetails />
             },
             {
-                path:"cart",
-                element:<Cart />
-            }
+                path: "cart",
+                element: <Cart />
+            },
+            {
+                path: 'shop',
+                element: <Products />
+            },
+            {
+                path: 'categories',
+                element: <Categories />
+            },
         ]
     },
     {
