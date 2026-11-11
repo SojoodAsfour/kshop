@@ -9,6 +9,8 @@ export default function CustomButton({
   disabled = false,
   onClick,
   sx = {},
+  component,
+  to,
 }) {
   return (
     <Button
@@ -18,7 +20,9 @@ export default function CustomButton({
       fullWidth={fullWidth}
       disabled={disabled}
       onClick={onClick}
-      sx={{borderRadius: '30px',py: 1.5, textTransform: 'uppercase',fontWeight: 600,...sx,}}
+      sx={{ borderRadius: '30px', py: 1.5, textTransform: 'uppercase', fontWeight: 600, ...sx, }}
+      component={component}
+      to={to}
     >
       {children}
     </Button>
