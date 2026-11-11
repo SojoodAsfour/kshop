@@ -13,7 +13,7 @@ export default function Home() {
     token ? <Alert severity="success">Welcome Back!</Alert>: <Alert severity="info">Please login to access more features.</Alert>
    }
       <HeroSection />
-      <Categories />
+      <Categories title="Shop by Category" showViewAll/>
       <Products />
    </>
   )
