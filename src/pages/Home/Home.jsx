@@ -4,6 +4,8 @@ import Products from '../../components/Products/Products'
 import Alert from '@mui/material/Alert';
 import { useAuthStore } from '../../store/useAuthStore';
 import HeroSection from '../../components/Home/HeroSection';
+import FormTactileSection from '../../components/Home/FormTactileSection';
+import ManifestoSection from '../../components/Home/ManifestoSection';
 
 export default function Home() {
   const token = useAuthStore((state) => state.token);
@@ -15,6 +17,8 @@ export default function Home() {
       <HeroSection />
       <Categories title="Shop by Category" showViewAll/>
       <Products title="Curated Essentials" limit={4}/>
+      <FormTactileSection />
+      <ManifestoSection />
    </>
   )
 }
