@@ -14,7 +14,7 @@ export default function Home() {
    }
       <HeroSection />
       <Categories title="Shop by Category" showViewAll/>
-      <Products />
+      <Products title="Curated Essentials" limit={4}/>
    </>
   )
 }
