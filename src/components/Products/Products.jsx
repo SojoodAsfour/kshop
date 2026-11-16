@@ -4,11 +4,21 @@ import { Alert, CircularProgress, Typography } from '@mui/material';
 import { useProducts } from '../../hooks/UseProducts';
 import ProductCard from '../ui/ProductCard';
 import PageContainer from '../ui/PageContainer';
+import useDebounce from '../../hooks/useDebounce';
+import { useState } from 'react';
+import TextField from '@mui/material/TextField';
 
-export default function Product({ title = 'Products', limit }) {
+export default function Product({ title = 'Products', limit, showSearch = false }) {
 
     const { data, isPending, isError } = useProducts();
-    const visibleProducts = limit ? data?.slice(0, limit) : data;
+    const [search, setSearch] = useState('');
+    const debouncedSearch = useDebounce(search, 500);
+    const filteredProducts = data?.filter((product) =>
+        product.name.toLowerCase().includes(debouncedSearch.trim().toLowerCase())
+    ) || [];
+
+    const visibleProducts = limit ? filteredProducts.slice(0, limit) : filteredProducts;
+
     if (isPending) {
         return (
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -39,6 +49,15 @@ export default function Product({ title = 'Products', limit }) {
                 {limit && <Typography variant='body2' color='text.secondary' sx={{ mb: 4 }}>
                     Every object reflects precision finish and natural materiality.
                 </Typography>}
+
+                {showSearch && <TextField
+                    fullWidth
+                    placeholder='Search products...'
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    sx={{ mb: 3 }}
+                />}
+
                 <Box sx={{
                     display: 'grid', gap: 2, gridTemplateColumns: {
                         xs: "repeat(1, 1fr)",
