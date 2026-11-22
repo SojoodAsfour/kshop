@@ -16,11 +16,12 @@ import useLogin from '../../hooks/useLogin';
 
 export default function Login() {
 
-  const {register,handleSubmit,errors,isSubmitting,serverError,onsubmit} = useLogin();
+  const { register, handleSubmit, errors, isSubmitting, serverError, onsubmit } = useLogin();
 
   const inputStyle = {
     '& .MuiOutlinedInput-root': {
-      bgcolor: '#FFF0ED',
+      bgcolor: 'background.soft',
+      color: 'text.primary',
       borderRadius: '10px',
 
       '& fieldset': {
@@ -28,7 +29,7 @@ export default function Login() {
       },
 
       '&:hover fieldset': {
-        borderColor: '#D8B5BB'
+        borderColor: 'divider'
       },
 
       '&.Mui-focused fieldset': {
@@ -78,7 +79,7 @@ export default function Login() {
           </Typography>
           <Box sx={{ display: 'flex', gap: 1, mt: 3, flexWrap: 'wrap' }}>
 
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, bgcolor: '#FFF7F5', p: 1, borderRadius: '5px' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, bgcolor: 'background.soft', p: 1, borderRadius: '5px' }}>
               <VerifiedUserOutlinedIcon sx={{ fontSize: 15, color: 'primary.main' }} />
 
               <Typography sx={{ fontSize: '10px' }}>
@@ -86,7 +87,7 @@ export default function Login() {
               </Typography>
             </Box>
 
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, bgcolor: '#FFF7F5', p: 1, borderRadius: '5px' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, bgcolor: 'background.soft', p: 1, borderRadius: '5px' }}>
               <LockOutlinedIcon sx={{ fontSize: 15, color: 'primary.main' }} />
 
               <Typography sx={{ fontSize: '10px' }}>
@@ -99,13 +100,13 @@ export default function Login() {
         </Box>
       </Box>
 
-      <Box sx={{ width: { xs: '100%', md: '45%' }, boxSizing: 'border-box', bgcolor: 'white', p: { xs: 3, md: 5 }, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Box sx={{ width: { xs: '100%', md: '45%' }, boxSizing: 'border-box', bgcolor: 'background.paper', p: { xs: 3, md: 5 }, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Box sx={{ width: '100%', maxWidth: '420px' }}>
 
           <Box sx={{ textAlign: 'center', mb: 4 }}>
 
             <Box sx={{
-              width: '44px', height: '44px', borderRadius: '50%', bgcolor: '#FCEAE5',
+              width: '44px', height: '44px', borderRadius: '50%', bgcolor: 'background.soft',
               display: 'flex', justifyContent: 'center', alignItems: 'center', mx: 'auto', mb: 1
             }}>
               <WineBarIcon sx={{ color: 'primary.main', fontSize: '22px' }} />
@@ -115,7 +116,7 @@ export default function Login() {
               Sign In
             </Typography>
 
-            <Typography sx={{ fontSize: '12px', color: '#948888', lineHeight: 1.6 }}>
+            <Typography sx={{ fontSize: '12px', color: 'text.secondary', lineHeight: 1.6 }}>
               Enter your credentials to access your Kashop dossier
             </Typography>
 
@@ -134,7 +135,7 @@ export default function Login() {
                     position: 'absolute',
                     left: 14,
                     top: 11,
-                    color: '#9C8184',
+                    color: 'text.secondary',
                     fontSize: 20,
                     zIndex: 2,
                     pointerEvents: 'none'
@@ -154,7 +155,7 @@ export default function Login() {
                     position: 'absolute',
                     left: 14,
                     top: 10,
-                    color: '#9C8184',
+                    color: 'text.secondary',
                     fontSize: 20,
                     zIndex: 2,
                     pointerEvents: 'none'
@@ -175,7 +176,7 @@ export default function Login() {
 
               <FormControlLabel control={
                 <Checkbox size="small" sx={{
-                  color: '#9C8184',
+                  color: 'text.secondary',
                   '&.Mui-checked': {
                     color: 'primary.main'
                   }
@@ -185,7 +186,7 @@ export default function Login() {
                   m: 0,
                   '& .MuiFormControlLabel-label': {
                     fontSize: '11px',
-                    color: '#8B8080'
+                    color: 'text.secondary'
                   }
                 }} />
 

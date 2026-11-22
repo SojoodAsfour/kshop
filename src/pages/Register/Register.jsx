@@ -36,7 +36,8 @@ export default function Register() {
 
   const inputStyle = {
     '& .MuiOutlinedInput-root': {
-      bgcolor: '#FFF0ED',
+      bgcolor: 'background.soft',
+      color: 'text.primary',
       borderRadius: '10px',
 
       '& fieldset': {
@@ -44,7 +45,7 @@ export default function Register() {
       },
 
       '&:hover fieldset': {
-        borderColor: '#D8B5BB'
+        borderColor: 'divider'
       },
 
       '&.Mui-focused fieldset': {
@@ -96,14 +97,14 @@ export default function Register() {
             {benefits.map((benefit) => (
               <Box key={benefit.id}
                 sx={{
-                  display: 'flex', alignItems: 'flex-start', mb: 2, bgcolor: 'white', p: 2, gap: 2, borderRadius: '10px',
+                  display: 'flex', alignItems: 'flex-start', mb: 2, bgcolor: 'background.paper', p: 2, gap: 2, borderRadius: '10px',
                   boxShadow: 1
                 }}>
                 <Box
                   sx={{
                     width: '24px', height: '24px', minWidth: '24px',
                     height: '24px', color: 'primary.main', borderRadius: '50%',
-                    bgcolor: '#EEDDDD', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    bgcolor: 'background.soft', display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontWeight: 'bold', fontSize: '12px'
                   }}>
                   {benefit.id}
@@ -124,7 +125,7 @@ export default function Register() {
         </Box>
       </Box>
 
-      <Box sx={{ width: { xs: '100%', md: '45%' }, bgcolor: 'white', p: { xs: 3, md: 5 }, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Box sx={{ width: { xs: '100%', md: '45%' }, bgcolor: 'background.paper', p: { xs: 3, md: 5 }, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Box sx={{ width: '100%', maxWidth: '420px' }}>
 
           <Typography variant="h4" component="h2">
@@ -144,7 +145,7 @@ export default function Register() {
                     position: 'absolute',
                     left: 14,
                     top: 11,
-                    color: '#9C8184',
+                    color: 'text.secondary',
                     fontSize: 18,
                     zIndex: 1,
                     pointerEvents: 'none'
@@ -163,7 +164,7 @@ export default function Register() {
                     position: 'absolute',
                     left: 14,
                     top: 11,
-                    color: '#9C8184',
+                    color: 'text.secondary',
                     fontSize: 20,
                     zIndex: 2,
                     pointerEvents: 'none'
@@ -183,7 +184,7 @@ export default function Register() {
                     position: 'absolute',
                     left: 14,
                     top: 11,
-                    color: '#9C8184',
+                    color: 'text.secondary',
                     fontSize: 20,
                     zIndex: 2,
                     pointerEvents: 'none'
@@ -203,7 +204,7 @@ export default function Register() {
                     position: 'absolute',
                     left: 14,
                     top: 11,
-                    color: '#9C8184',
+                    color: 'text.secondary',
                     fontSize: 20,
                     zIndex: 2,
                     pointerEvents: 'none'
@@ -223,7 +224,7 @@ export default function Register() {
                     position: 'absolute',
                     left: 14,
                     top: 10,
-                    color: '#9C8184',
+                    color: 'text.secondary',
                     fontSize: 20,
                     zIndex: 2,
                     pointerEvents: 'none'

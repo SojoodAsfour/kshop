@@ -15,21 +15,31 @@ export default function useForgotPassword() {
     });
 
     const onsubmit = async (data) => {
-        setServerError(null);
-        try {
-            await axiosInstance.post("/auth/Account/SendCode", data);
-            navigate("/reset-password", {
-                state: { email: data.email }
-            });
+    setServerError(null);
 
-        } catch (err) {
+    try {
+        const email = data.email.trim();
 
-            console.error(err.response);
-            setServerError("Unable to send the code. Please try again.");
+        await axiosInstance.post("/auth/Account/SendCode", {
+            email: email
+        });
 
-        }
+        navigate("/reset-password", {
+            state: { email: email }
+        });
 
-    };
+    } catch (err) {
+
+        console.error(err.response?.data);
+
+        setServerError(
+            err.response?.data?.message ||
+            "Unable to send the code. Please try again."
+        );
+
+    }
+
+};
 
     return {
         register, handleSubmit, errors, isSubmitting, serverError, onsubmit

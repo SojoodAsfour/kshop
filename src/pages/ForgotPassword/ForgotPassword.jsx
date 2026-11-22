@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Box, TextField, Typography, Alert } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -11,7 +10,7 @@ import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 export default function ForgotPassword() {
-  
+
   const { register, handleSubmit, errors, isSubmitting, serverError, onsubmit } = useForgotPassword();
 
   return (
@@ -20,7 +19,7 @@ export default function ForgotPassword() {
       <Box sx={{
         width: {
           xs: '100%', md: '50%'
-        }, bgcolor: '#FCEAE5', p: { xs: 3, md: 5 }, minHeight: { xs: 'auto', md: '100vh' }, boxSizing: 'border-box',
+        }, bgcolor: 'background.paper', p: { xs: 3, md: 5 }, minHeight: { xs: 'auto', md: '100vh' }, boxSizing: 'border-box',
         display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'
       }}>
         <Box sx={{ width: '100%', maxWidth: '400px' }}>
@@ -60,7 +59,7 @@ export default function ForgotPassword() {
           <Box component="form" onSubmit={handleSubmit(onsubmit)} noValidate>
             <Box sx={{
               display: 'flex', alignItems: 'center',
-              gap: 1, bgcolor: '#FCEAE5',
+              gap: 1, bgcolor: 'background.soft',
               borderRadius: '6px', p: 1, mb: 2
             }}>
               <VerifiedUserOutlinedIcon
@@ -89,7 +88,7 @@ export default function ForgotPassword() {
                     left: 14,
                     top: 12,
                     fontSize: '20px',
-                    color: '#9C8184',
+                    color: 'text.secondary',
                     zIndex: 2,
                     pointerEvents: 'none'
                   }}
@@ -100,7 +99,8 @@ export default function ForgotPassword() {
                   error={!!errors.email} helperText={errors.email?.message}
                   sx={{
                     '& .MuiOutlinedInput-root': {
-                      bgcolor: '#FFF0ED',
+                      bgcolor: 'background.soft',
+                      color: 'text.primary',
                       borderRadius: '10px',
 
                       '& fieldset': {
@@ -140,10 +140,10 @@ export default function ForgotPassword() {
             </CustomButton>
           </Box>
 
-          <Box sx={{mt: 5,textAlign: 'center'}}>
-            <Typography sx={{fontSize: '11px',color: 'natural.main',mb: 1}}>
+          <Box sx={{ mt: 5, textAlign: 'center' }}>
+            <Typography sx={{ fontSize: '11px', color: 'natural.main', mb: 1 }}>
               Remembered your credentials?{' '}
-              <Box component={Link} to="/login" sx={{color: 'primary.main',fontWeight: 600,textDecoration: 'none',fontSize: '11px'}}>
+              <Box component={Link} to="/login" sx={{ color: 'primary.main', fontWeight: 600, textDecoration: 'none', fontSize: '11px' }}>
                 RETURN TO SIGN IN
               </Box>
             </Typography>

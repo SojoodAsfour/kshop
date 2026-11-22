@@ -29,7 +29,7 @@ export default function OTPVerification({ email, newPassword, onBack }) {
 
       <Box sx={{
         width: { xs: '100%', md: '50%' }, minHeight: { xs: 'auto', md: '100vh' },
-        bgcolor: '#FFF8F6', boxSizing: 'border-box',
+        bgcolor: 'background.paper', boxSizing: 'border-box',
         display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', p: {
           xs: 3,
           md: 5
@@ -65,7 +65,7 @@ export default function OTPVerification({ email, newPassword, onBack }) {
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, my: 3 }}>
               {code.map((digit, index) => (
 
-                <TextField key={index} value={digit} inputRef={(element) => {inputRefs.current[index] = element;}}
+                <TextField key={index} value={digit} inputRef={(element) => { inputRefs.current[index] = element; }}
                   onChange={(event) => {
                     const value = event.target.value;
                     if (!/^\d?$/.test(value)) {
@@ -100,7 +100,8 @@ export default function OTPVerification({ email, newPassword, onBack }) {
                     width: '65px',
                     '& .MuiOutlinedInput-root': {
                       borderRadius: '12px',
-                      bgcolor: 'white'
+                      bgcolor: 'background.soft',
+                      color: 'text.primary'
                     },
                     '& input': {
                       textAlign: 'center',

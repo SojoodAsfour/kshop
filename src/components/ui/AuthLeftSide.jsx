@@ -6,9 +6,13 @@ export default function AuthLeftSide() {
         <Box sx={{
             width: { xs: '100%', md: '50%' },
             minHeight: { xs: '250px', md: '100vh' },
-            bgcolor: 'primary.main', display: 'flex',
+            bgcolor: (theme) => theme.palette.mode === 'dark'
+                ? 'background.soft'
+                : 'primary.main', display: 'flex',
             flexDirection: 'column', justifyContent: 'center',
-            alignItems: 'center', color: 'white'
+            alignItems: 'center', color: (theme) => theme.palette.mode === 'dark'
+                ? 'text.primary'
+                : '#FFFFFF'
         }}>
             <Box sx={{
                 width: '48px', height: '48px',
