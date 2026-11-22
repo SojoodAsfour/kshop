@@ -2,7 +2,7 @@ import React from 'react'
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Tooltip } from '@mui/material';
 import { Link, NavLink } from 'react-router-dom';
 import useNavbar from '../hooks/useNavbar';
 import { Badge, IconButton } from '@mui/material';
@@ -12,6 +12,8 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined'; import { Me
 import { useState } from 'react';
 import BrandLogo from './ui/BrandLogo';
 import MenuIcon from '@mui/icons-material/Menu';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 const navLinks = [
   { name: 'HOME', path: '/' },
@@ -23,9 +25,10 @@ const navLinks = [
 
 export default function Navbar() {
 
-  const { token, logout, cartCount } = useNavbar();
+  const { token, logout, cartCount, toggleMode, mode } = useNavbar();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMenu, setMobileMenu] = useState(null);
+
 
   return (
     <AppBar position="static" sx={{
@@ -42,11 +45,13 @@ export default function Navbar() {
           <Menu anchorEl={mobileMenu} open={Boolean(mobileMenu)} onClose={() => setMobileMenu(null)}>
             {navLinks.map((link) => (
               <MenuItem key={link.path} component={NavLink} to={link.path} onClick={() => setMobileMenu(null)}
-                sx={{fontSize: '0.8rem', color: 'text.primary',
+                sx={{
+                  fontSize: '0.8rem', color: 'text.primary',
                   '&.active': {
                     color: 'primary.main',
                     bgcolor: 'background.soft'
-                  }}}>
+                  }
+                }}>
                 {link.name}
               </MenuItem>
             ))}
@@ -75,10 +80,12 @@ export default function Navbar() {
         </Box>
 
 
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: {md:1}, ml: 'auto' }}>
-          <IconButton component={Link} to="/shop" sx={{ color: 'text.primary' }}>
-            <SearchIcon fontSize="small" />
-          </IconButton>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: { md: 1 }, ml: 'auto' }}>
+          <Tooltip title="Search">
+            <IconButton component={Link} to="/shop" sx={{ color: 'text.primary' }}>
+              <SearchIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
 
 
           {token ? (
@@ -103,11 +110,19 @@ export default function Navbar() {
           )}
 
 
-          <IconButton component={Link} to="/cart" sx={{ color: 'primary.main' }}>
-            <Badge badgeContent={cartCount} color="primary">
-              <ShoppingBagOutlinedIcon fontSize="small" />
-            </Badge>
-          </IconButton>
+          <Tooltip title="View cart">
+            <IconButton component={Link} to="/cart" sx={{ color: 'primary.main' }}>
+              <Badge badgeContent={cartCount} color="primary">
+                <ShoppingBagOutlinedIcon fontSize="small" />
+              </Badge>
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title={mode === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}>
+            <IconButton onClick={toggleMode} sx={{ display: { xs: 'none', md: 'flex' }, color: 'primary.main' }} aria-label="Toggle theme mode">
+              {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
+            </IconButton>
+          </Tooltip>
         </Box>
       </Toolbar>
     </AppBar>

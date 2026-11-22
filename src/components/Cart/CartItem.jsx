@@ -5,11 +5,12 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import useRemoveItemCart from '../../hooks/useRemoveItemCart';
 import { toast } from 'react-toastify';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 
-export default function CartItem({ item }) {
+export default function CartItem({ item, image }) {
 
   const { mutate: updateCartItem, isPending } = useUpdateCartItem();
-  const { mutate: removeItemCart , isPending: isRemovePending } = useRemoveItemCart();
+  const { mutate: removeItemCart, isPending: isRemovePending } = useRemoveItemCart();
   const handleIncrease = () => {
     updateCartItem({ productId: item.productId, count: item.count + 1 });
   };
@@ -20,30 +21,43 @@ export default function CartItem({ item }) {
   };
 
   const handleRemove = () => {
-    removeItemCart(item.productId);
-    onSuccess: () => {
-      toast.success('Item removed from cart');
-    }
-
-    onError: (error) => {
-      toast.error('Failed to remove item from cart');
-    }
-  };
+    removeItemCart(item.productId, {
+      onSuccess: () => {
+        toast.success('Item removed from cart');
+      },
+      onError: () => {
+        toast.error('Failed to remove item from cart');
+      }
+    });
+  }
+  console.log(item);
 
   return (
-    <Paper sx={{ p: 2, mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <Box>
-        <Typography >{item.productName}</Typography>
-        <Typography >Price: ${item.price} each</Typography>
+    <Paper sx={{
+      p: 2, mb: 2, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'flex-start', md: 'center' }, gap: 2, bgcolor: 'background.paper',
+      border: 1, borderColor: 'divider', borderRadius: 2, boxShadow: 'none'
+    }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }}>
+        {image &&
+         <Box component='img' src={image} alt={item.productName}sx={{width: 75,height: 75, objectFit: 'contain', bgcolor: 'background.soft', borderRadius: 1}}/>}
+        <Box>
+          <Typography variant='h6' component='h2' sx={{ fontSize: '1rem' }}>
+            {item.productName}
+          </Typography>
+
+          <Typography variant='body2' color='text.secondary'>
+            Single: {item.price}
+          </Typography>
+        </Box>
       </Box>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', border:1, borderColor:'grey.400', borderRadius:1, p:1 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', bgcolor: 'background.soft', borderRadius: 5, p: 0.5 }}>
         <IconButton onClick={handleDecrease} disabled={isPending || item.count == 1}>
           <RemoveIcon fontSize='small' />
         </IconButton>
         <Typography >{item.count}</Typography>
         <IconButton onClick={handleIncrease} disabled={isPending}>
-          <Typography >+</Typography>
+          <AddIcon fontSize='small' />
         </IconButton>
       </Box>
 

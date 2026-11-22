@@ -12,21 +12,28 @@ import CartSummary from '../../components/Cart/CartSummary';
 import useClearCart from '../../hooks/useClearCart';
 import { toast } from 'react-toastify';
 import { Button } from '@mui/material';
+import { useState } from 'react';
+import ConfirmDialog from '../../components/ui/ConfirmDialog';
+import { useProducts } from '../../hooks/UseProducts';
+import PageContainer from '../../components/ui/PageContainer';
 
 export default function Cart() {
     const { mutate: clearCart, isPending: isClearing } = useClearCart();
 
     const handleClearCart = () => {
-        if (window.confirm('Are you sure you want to clear your cart?')) {
-            clearCart(undefined, {
-                onSuccess: () => toast.success('Cart cleared successfully'),
-                onError: () => toast.error('Failed to clear cart')
-            });
-        }
+        clearCart(undefined, {
+            onSuccess: () => {
+                toast.success('Cart cleared successfully');
+                setOpenConfirm(false);
+            },
+            onError: () => toast.error('Failed to clear cart')
+        });
     }
 
     const token = useAuthStore((state) => state.token);
     const { data, isPending, isError } = useCart();
+    const { data: products } = useProducts();
+    const [openConfirm, setOpenConfirm] = useState(false);
     const navigate = useNavigate();
 
     if (!token) {
@@ -67,33 +74,46 @@ export default function Cart() {
 
     return (
         <>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-                <Typography variant='h1' sx={{ fontSize: { xs: '1.5rem', md: '2rem' } }}>
-                    Your Shopping Bag
-                </Typography>
+            <ConfirmDialog
+                open={openConfirm}
+                onClose={() => setOpenConfirm(false)}
+                onConfirm={handleClearCart}
+                title='Clear Shopping Bag'
+                message='Are you sure you want to remove all items from your cart?'
+                isPending={isClearing}
+            />
+            <PageContainer>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+                    <Typography variant='h1' sx={{ fontSize: { xs: '1.5rem', md: '2rem' } }}>
+                        Your Shopping Bag
+                    </Typography>
 
-                <Button onClick={handleClearCart} disabled={isClearing} sx={{ color: 'primary.main', fontSize: '0.75rem' }}>
-                    Clear Bag
-                </Button>
-            </Box>
-            <Box sx={{
-                display: 'grid',
-                gridTemplateColumns: { xs: '1fr', md: '2fr 1fr' },
-                gap: 4,
-                backgroundColor: 'background.default',
-                border: '1px solid',
-                borderColor: 'divider',
-            }}>
-                <Box>
-                    {data?.items?.map((item) => (
-                        <CartItem key={item.id} item={item} />
-                    ))}
+                    <Button onClick={() => setOpenConfirm(true)} disabled={isClearing} sx={{ color: 'primary.main', fontSize: '0.75rem' }}>
+                        Clear Bag
+                    </Button>
                 </Box>
+                <Box sx={{
+                    display: 'grid',
+                    gridTemplateColumns: { xs: '1fr', md: '2fr 1fr' },
+                    gap: 3,
+                    alignItems: 'start',
+                    backgroundColor: 'background.default',
+                    
+                }}>
+                    <Box>
+                        {data?.items?.map((item) => (
+                            <CartItem key={item.productId} item={item}
+                                image={products?.find((product) => product.id === item.productId)?.image}
+                            />
+                        ))}
+                    </Box>
 
-                <Box>
-                    <CartSummary total={data.cartTotal} />
+                    <Box>
+                        <CartSummary total={data.cartTotal} />
+                    </Box>
+
                 </Box>
-            </Box>
+            </PageContainer>
         </>
     )
 }
