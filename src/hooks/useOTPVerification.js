@@ -5,9 +5,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { otpSchema } from '../validations/authSchemas';
 import axiosInstance from '../api/axiosInstance';
+import { useTranslation } from 'react-i18next';
 
 export default function useOTPVerification(email, newPassword, onBack) {
 
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [serverError, setServerError] = useState(null);
     const [success, setSuccess] = useState(false);
@@ -35,9 +37,9 @@ export default function useOTPVerification(email, newPassword, onBack) {
             console.error(err.response?.data);
 
             if (err.response?.data?.message === "New password must be different from old password") {
-                onBack(err.response.data.message);
+                onBack(t('resetPassword.samePasswordError'));
             } else {
-                setServerError(err.response?.data?.message || "Unable to reset password. Please try again.");
+                setServerError(err.response?.data?.message || t('resetPassword.resetError'));
             }
 
         }

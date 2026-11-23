@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useAuthStore } from '../store/useAuthStore';
+import { useLanguageStore } from '../store/languageStore.js';
 
 const authAxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_BASEURL,
@@ -14,7 +15,7 @@ authAxiosInstance.interceptors.request.use((config) => {
     if(token){
         config.headers.Authorization = `Bearer ${token}`;
     }
-
+    config.headers['Accept-Language'] = useLanguageStore.getState().language;
     return config;
 });
 

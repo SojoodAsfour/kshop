@@ -1,13 +1,14 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerSchema } from '../validations/authSchemas';
 import axiosInstance from '../api/axiosInstance';
+import { useTranslation } from 'react-i18next';
 
 export default function useRegister() {
 
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [serverError, setServerError] = useState(null);
 
@@ -24,7 +25,7 @@ export default function useRegister() {
       navigate("/login");
     } catch (err) {
       console.error(err.response);
-      setServerError("An error occurred while registering. Please try again.");
+      setServerError(t('register.registrationError'));
 
     }};
 

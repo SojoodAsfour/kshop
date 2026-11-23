@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -6,9 +5,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '../validations/authSchemas';
 import { useAuthStore } from '../store/useAuthStore';
 import axiosInstance from '../api/axiosInstance';
+import { useTranslation } from 'react-i18next';
 
 export default function useLogin() {
 
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
   const [serverError, setServerError] = useState(null);
@@ -27,7 +28,7 @@ export default function useLogin() {
 
     } catch (err) {
       console.error(err.response?.status);
-      setServerError('Invalid email or password. Please try again.');
+      setServerError(t('login.invalidCredentials'));
     }};
 
   return {register,handleSubmit,errors,isSubmitting,serverError, onsubmit};

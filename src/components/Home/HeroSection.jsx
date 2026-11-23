@@ -5,35 +5,37 @@ import CustomButton from '../ui/CustomButton';
 import { useProducts } from '../../hooks/UseProducts';
 import { CircularProgress } from '@mui/material';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 
 
 export default function HeroSection() {
 
+    const { t } = useTranslation();
     const { data: products, isPending, isError } = useProducts();
-
     const heroProduct = products?.[0];
 
     return (
-        <Box sx={{ bgcolor: 'background.soft', py: { xs: 4, md: 5} }}>
+        <Box sx={{ bgcolor: 'background.soft', py: { xs: 4, md: 5 } }}>
             <Container maxWidth="lg">
                 <Box sx={{
                     display: 'grid', gridTemplateColumns: {
                         xs: '1fr',
                         md: '1.2fr 0.8fr'
                     },
-                    gap: { xs: 4, md: 6 }, alignItems: 'center'}}>
+                    gap: { xs: 4, md: 6 }, alignItems: 'center'
+                }}>
 
-                    <Box component={motion.div}  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+                    <Box component={motion.div} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
                         <Typography variant="overline" sx={{ color: 'primary.main' }}>
-                            NEW COLLECTION
+                            {t('hero.newCollection')}
                         </Typography>
 
-                        <Typography variant="h1" sx={{ fontSize: { xs: '2rem', md: '3rem' }, mb: 2, maxWidth: '550px',lineHeight: 1,}}>
-                            Thoughtfully Curated Essentials for Modern Living
+                        <Typography variant="h1" sx={{ fontSize: { xs: '2rem', md: '3rem' }, mb: 2, maxWidth: '550px', lineHeight: 1, }}>
+                            {t('hero.title')}
                         </Typography>
 
                         <Typography variant="body2" color="text.secondary">
-                            Discover timeless craftsmanship, refined silhouettes, and enduring quality in every piece.
+                            {t('hero.description')}
                         </Typography>
 
 
@@ -45,7 +47,7 @@ export default function HeroSection() {
                                     px: 3,
                                     py: 1
                                 }}>
-                                Shop Now
+                                {t('hero.shopNow')}
                             </CustomButton>
 
                             <CustomButton component={Link} to="/categories" variant="text" color="inherit" fullWidth={false}
@@ -54,7 +56,7 @@ export default function HeroSection() {
                                     textTransform: 'none',
                                     fontSize: '0.75rem'
                                 }}>
-                                View Catalog →
+                                {t('hero.viewCatalog')} →
                             </CustomButton>
                         </Box>
 
@@ -65,12 +67,12 @@ export default function HeroSection() {
                             <CircularProgress />
                         ) : isError ? (
                             <Typography color="error">
-                                Error loading product
+                                {t('home.errorLoadingProducts')}
                             </Typography>
                         ) : heroProduct ? (
                             <Box component="img" src={heroProduct.image} alt={heroProduct.name} sx={{ width: '100%', height: { xs: 220, md: 280 }, objectFit: 'contain', display: 'block' }} />
                         ) : (
-                            <Typography>No products available</Typography>
+                            <Typography>{t('home.noProducts')}</Typography>
                         )}
 
                         {heroProduct && (<Typography variant="caption" sx={{ display: 'block', mt: 1, color: 'text.secondary' }}>

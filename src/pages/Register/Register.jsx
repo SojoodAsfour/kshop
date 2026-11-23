@@ -11,26 +11,28 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import useRegister from '../../hooks/useRegister';
+import { useTranslation } from 'react-i18next';
 
 
 
 export default function Register() {
+  const { t } = useTranslation();
   const { register,handleSubmit,errors,isSubmitting,serverError,onsubmit} = useRegister();
   const benefits = [
     {
       id: 1,
-      title: "Streamlined Acquisition",
-      description: "Rapid checkout with Visa or Cash on Delivery settlement protocols."
+      title: t('register.heading'),
+      description: t('register.description')
     },
     {
       id: 2,
-      title: "Order Archival",
-      description: "Full provenance records and dispatch dossier preserved for each piece."
+      title: t('register.orderArchival'),
+      description: t('register.orderArchivalDescription')
     },
     {
       id: 3,
-      title: "Curated Inquiries",
-      description: "Direct priority conduit to the concierge advisory team for product counsel."
+      title: t('register.curatedInquiries'),
+      description: t('register.curatedInquiriesDescription')
     }
   ];
 
@@ -81,16 +83,16 @@ export default function Register() {
 
         <Box>
           <Typography component="h1" sx={{ fontSize: { xs: '30px', md: '40px' }, fontWeight: 'bold', mt: 4, lineHeight: 1.2 }}>
-            Begin Your{' '}
+            {t('register.beginYour')}{' '}
             <Box component="span" sx={{ color: 'primary.main', fontStyle: 'italic' }}>
-              Curated
+              {t('register.curated')}
             </Box>
             <br />
-            Journey
+            {t('register.journey')}
           </Typography>
 
           <Typography sx={{ mt: 2, fontSize: { xs: '13px', md: '16px' }, lineHeight: 1.5, color: 'natural.main' }}>
-            Create your private Kashop profile to seamlessly review verified products, expedite future acquisitions, and maintain an archival record of your orders.
+            {t('register.introDescription')}
           </Typography>
 
           <Box sx={{ mt: 4 }}>
@@ -129,7 +131,7 @@ export default function Register() {
         <Box sx={{ width: '100%', maxWidth: '420px' }}>
 
           <Typography variant="h4" component="h2">
-            Create Your Account
+            {t('register.title')}
           </Typography>
           {serverError ? <Alert severity="error" sx={{ mt: 2 }}>{serverError}</Alert> : null}
 
@@ -137,7 +139,7 @@ export default function Register() {
 
             <Box sx={{ mt: 2 }}>
               <Typography sx={{ fontSize: '11px', fontWeight: 'bold', color: 'natural.main', mb: 1 }}>
-                FULL NAME *
+                {t('register.fullName')} *
               </Typography>
               <Box sx={{ position: 'relative' }}>
                 <PersonOutlinedIcon
@@ -150,13 +152,13 @@ export default function Register() {
                     zIndex: 1,
                     pointerEvents: 'none'
                   }} />
-                <TextField placeholder="e.g. Lady Vivienne Claire" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('fullName')}
+                <TextField placeholder={t('register.fullNamePlaceholder')} sx={{ ...inputStyle, width: '100%' }} size="small" {...register('fullName')}
                   error={!!errors.fullName} helperText={errors.fullName?.message}></TextField>
               </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
               <Typography sx={{ fontSize: '11px', fontWeight: 'bold', color: 'natural.main', mb: 1 }}>
-                USERNAME *
+                {t('register.username')} *
               </Typography>
               <Box sx={{ position: "relative" }}>
                 <AccountCircleOutlinedIcon
@@ -170,13 +172,13 @@ export default function Register() {
                     pointerEvents: 'none'
                   }}
                 />
-                <TextField placeholder="Enter your username" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('userName')}
+                <TextField placeholder={t('register.usernamePlaceholder')} sx={{ ...inputStyle, width: '100%' }} size="small" {...register('userName')}
                   error={!!errors.userName} helperText={errors.userName?.message}></TextField>
               </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
               <Typography sx={{ fontSize: '11px', fontWeight: 'bold', color: 'natural.main', mb: 1 }}>
-                EMAIL ADDRESS *
+                {t('register.email')} *
               </Typography>
               <Box sx={{ position: "relative" }}>
                 <EmailOutlinedIcon
@@ -190,13 +192,13 @@ export default function Register() {
                     pointerEvents: 'none'
                   }}
                 />
-                <TextField placeholder="e.g. lady.vivienne.claire@example.com" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('email')}
+                <TextField placeholder={t('register.emailPlaceholder')} sx={{ ...inputStyle, width: '100%' }} size="small" {...register('email')}
                   error={!!errors.email} helperText={errors.email?.message}></TextField>
               </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
               <Typography sx={{ fontSize: '11px', fontWeight: 'bold', color: 'natural.main', mb: 1 }}>
-                PHONE NUMBER *
+                {t('register.phone')} *
               </Typography>
               <Box sx={{ position: 'relative' }}>
                 <PhoneOutlinedIcon
@@ -210,13 +212,13 @@ export default function Register() {
                     pointerEvents: 'none'
                   }}
                 />
-                <TextField placeholder="e.g. 050-123-4567" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('phoneNumber')}
+                <TextField placeholder={t('register.phonePlaceholder')} sx={{ ...inputStyle, width: '100%' }} size="small" {...register('phoneNumber')}
                   error={!!errors.phoneNumber} helperText={errors.phoneNumber?.message}></TextField>
               </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
               <Typography sx={{ fontSize: '11px', fontWeight: 'bold', color: 'natural.main', mb: 1 }}>
-                PASSWORD *
+                {t('register.password')} *
               </Typography>
               <Box sx={{ position: 'relative' }}>
                 <LockOutlinedIcon
@@ -230,17 +232,17 @@ export default function Register() {
                     pointerEvents: 'none'
                   }}
                 />
-                <TextField placeholder="Create a strong password" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('password')}
+                <TextField placeholder={t('register.passwordPlaceholder')} sx={{ ...inputStyle, width: '100%' }} size="small" {...register('password')}
                   error={!!errors.password} helperText={errors.password?.message} type='password'></TextField>
               </Box>
             </Box>
 
             <CustomButton type="submit" fullWidth sx={{ mt: 2 }} disabled={isSubmitting}>
-              {isSubmitting ? "Loading..." : "Create Account"}
+              {isSubmitting ? t('register.submitting') : t('register.submit')}
             </CustomButton>
 
             <Typography variant="body2" color="textSecondary" align="center" sx={{ mt: 2, fontFamily: 'Georgia, serif' }}>
-              already have an account? <Link to="/login">Sign In</Link>
+              {t('register.alreadyHaveAccount')} <Link to="/login">{t('register.signIn')}</Link>
             </Typography>
 
           </Box>

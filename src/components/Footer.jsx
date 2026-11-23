@@ -1,39 +1,41 @@
 import React from 'react'
 import { Box, Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 
 const footerSections = [
   {
-    title: 'NAVIGATION',
+    title: 'navigation',
     links: [
-      { name: 'Home', path: '/' },
-      { name: 'All Products', path: '/shop' },
-      { name: 'Categories', path: '/categories' },
-      { name: 'About' },
-      { name: 'Contact' }
+      { name: 'home', path: '/' },
+      { name: 'allProducts', path: '/shop' },
+      { name: 'categories', path: '/categories' },
+      { name: 'about' },
+      { name: 'contact' }
     ]
   },
   {
-    title: 'CUSTOMER CARE',
+    title: 'customerCare',
     links: [
-      { name: 'Shopping Cart', path: '/cart' },
-      { name: 'Visa & Cash Payments' },
-      { name: 'Order Tracking' },
-      { name: 'FAQ' }
+      { name: 'shoppingCart', path: '/cart' },
+      { name: 'payments' },
+      { name: 'orderTracking' },
+      { name: 'faq' }
     ]
   },
   {
-    title: 'ACCOUNT',
+    title: 'account',
     links: [
-      { name: 'Account Information' },
-      { name: 'My Orders' },
-      { name: 'Sign In', path: '/login' }
+      { name: 'accountInformation' },
+      { name: 'myOrders' },
+      { name: 'signIn', path: '/login' }
     ]
   }
 ];
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <Box component="footer" sx={{ bgcolor: 'background.footer', py: { xs: 4, md: 6 } }}>
       <Container maxWidth="lg">
@@ -52,8 +54,7 @@ export default function Footer() {
             </Typography>
 
             <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.8 }}>
-              Curated elegance and modern shopping.
-              Discover timeless pieces selected with thoughtful purpose and refined design.
+              {t('footer.description')}
             </Typography>
           </Box>
 
@@ -61,7 +62,7 @@ export default function Footer() {
           {footerSections.map((section) => (
             <Box key={section.title}>
               <Typography sx={{ fontWeight: 600, fontSize: '0.85rem', mb: 2 }}>
-                {section.title}
+                {t(`footer.${section.title}`)}
               </Typography>
 
               {section.links.map((link) => (
@@ -76,11 +77,11 @@ export default function Footer() {
                       color: 'primary.main'
                     }
                   }}>
-                    {link.name}
+                    {t(`footer.${link.name}`)}
                   </Typography>
                 ) : (
                   <Typography key={link.name} sx={{ fontSize: '0.75rem', color: 'text.secondary', mb: 1 }}>
-                    {link.name}
+                    {t(`footer.${link.name}`)}
                   </Typography>
                 )
               ))}
@@ -91,14 +92,14 @@ export default function Footer() {
         </Box>
 
 
-        <Box sx={{display: 'flex',justifyContent: 'space-between',flexDirection: { xs: 'column', sm: 'row' },
+        <Box sx={{display: 'flex',justifyContent:'space-between',flexDirection: { xs: 'column', sm: 'row' },
           gap: 2,pt: 1, borderTop: 1,borderColor: 'divider'}}>
           <Typography variant="caption" color="text.secondary">
-            © {new Date().getFullYear()} Kashop. All rights reserved.
+            © {new Date().getFullYear()} Kashop. {t('footer.allRightsReserved')}
           </Typography>
 
           <Typography variant="caption" color="text.secondary">
-            Artisanal Luxury • Editorial Commerce
+            {t('footer.tagline')}
           </Typography>
         </Box>
 

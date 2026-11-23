@@ -1,56 +1,57 @@
 import * as yup from 'yup';
+import i18n from '../i18n';
 
 export const registerSchema = yup.object({
-  fullName: yup.string().required("Full Name is required")
-    .min(3, "Full Name must be at least 3 characters")
-    .max(50, "Full Name must not exceed 50 characters"),
+  fullName: yup.string().required(() => i18n.t('validation.fullNameRequired'))
+    .min(3, () => i18n.t('validation.fullNameMin'))
+    .max(50, () => i18n.t('validation.fullNameMax')),
 
-  userName: yup.string().required("Username is required")
-    .min(3, "Username must be at least 3 characters")
-    .max(20, "Username must not exceed 20 characters")
-    .matches(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers and underscores"),
+  userName: yup.string().required(() => i18n.t('validation.usernameRequired'))
+    .min(3, () => i18n.t('validation.usernameMin'))
+    .max(20, () => i18n.t('validation.usernameMax'))
+    .matches(/^[a-zA-Z0-9_]+$/, () => i18n.t('validation.usernameFormat')),
 
-  email: yup.string().required("Email is required")
-    .email("Invalid email format"),
+  email: yup.string().required(() => i18n.t('validation.emailRequired'))
+    .email(() => i18n.t('validation.invalidEmail')),
 
-  password: yup.string().required("Password is required")
-    .min(6, "Password must be at least 6 characters")
-    .max(50, "Password must not exceed 50 characters")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-    .matches(/[0-9]/, "Password must contain at least one number")
-    .matches(/[^A-Za-z0-9]/, "Password must contain at least one special character"),
+  password: yup.string().required(() => i18n.t('validation.passwordRequired'))
+    .min(6, () => i18n.t('validation.registerPasswordMin'))
+    .max(50, () => i18n.t('validation.passwordMax'))
+    .matches(/[A-Z]/, () => i18n.t('validation.passwordUppercase'))
+    .matches(/[a-z]/, () => i18n.t('validation.passwordLowercase'))
+    .matches(/[0-9]/, () => i18n.t('validation.passwordNumber'))
+    .matches(/[^A-Za-z0-9]/, () => i18n.t('validation.passwordSpecial')),
 
-  phoneNumber: yup.string().required("Phone Number is required")
-    .matches(/^05\d{8}$/, "Phone Number must start with 05 and contain exactly 10 digits"),
+  phoneNumber: yup.string().required(() => i18n.t('validation.phoneRequired'))
+    .matches(/^05\d{8}$/, () => i18n.t('validation.phoneFormat')),
 });
 
 export const loginSchema = yup.object({
-  email: yup.string().required("Email is required")
-    .email("Invalid email format"),
+  email: yup.string().required(() => i18n.t('validation.emailRequired'))
+    .email(() => i18n.t('validation.invalidEmail')),
 
-  password: yup.string().required("Password is required"),
+  password: yup.string().required(() => i18n.t('validation.passwordRequired')),
 });
 
 export const forgotPasswordSchema = yup.object({
-  email: yup.string().required("Email is required").email("Invalid email format")
+  email: yup.string().required(() => i18n.t('validation.emailRequired')).email(() => i18n.t('validation.invalidEmail'))
 });
 
 export const otpSchema = yup.object({
   code: yup.string()
-    .required("Verification code is required")
-    .matches(/^\d{4}$/, "Verification code must be exactly 4 digits")
+    .required(() => i18n.t('validation.codeRequired'))
+    .matches(/^\d{4}$/, () => i18n.t('validation.codeFormat'))
 });
 
 export const resetPasswordSchema = yup.object({
   newPassword: yup.string()
-    .required("New Password is required")
-    .min(8, "Password must be at least 8 characters")
-    .matches(/[A-Z]/, "Password must contain an uppercase letter")
-    .matches(/[0-9]/, "Password must contain a number")
-    .matches(/[^a-zA-Z0-9]/, "Password must contain a symbol"),
+    .required(() => i18n.t('validation.newPasswordRequired'))
+    .min(8, () => i18n.t('validation.resetPasswordMin'))
+    .matches(/[A-Z]/, () => i18n.t('validation.resetPasswordUppercase'))
+    .matches(/[0-9]/, () => i18n.t('validation.resetPasswordNumber'))
+    .matches(/[^a-zA-Z0-9]/, () => i18n.t('validation.resetPasswordSymbol')),
 
   confirmPassword: yup.string()
-    .required("Confirm Password is required")
-    .oneOf([yup.ref('newPassword')], "Passwords must match")
+    .required(() => i18n.t('validation.confirmPasswordRequired'))
+    .oneOf([yup.ref('newPassword')], () => i18n.t('validation.passwordMismatch'))
 });

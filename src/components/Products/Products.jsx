@@ -7,11 +7,13 @@ import PageContainer from '../ui/PageContainer';
 import useDebounce from '../../hooks/useDebounce';
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
+import { useTranslation } from 'react-i18next';
 
 export default function Product({ title = 'Products', limit, showSearch = false }) {
 
     const { data, isPending, isError } = useProducts();
     const [search, setSearch] = useState('');
+    const { t } = useTranslation();
     const debouncedSearch = useDebounce(search, 500);
     const filteredProducts = data?.filter((product) =>
         product.name.toLowerCase().includes(debouncedSearch.trim().toLowerCase())
@@ -30,7 +32,7 @@ export default function Product({ title = 'Products', limit, showSearch = false 
     if (isError) {
         return (
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Alert severity="error">Error fetching Products</Alert>
+                <Alert severity="error">{t('products.errorFetching')}</Alert>
             </Box>
         )
     }
@@ -41,18 +43,18 @@ export default function Product({ title = 'Products', limit, showSearch = false 
                 pb: { xs: 5, md: 8 },
             }}>
                 {limit && <Typography variant='overline' color='primary'>
-                    SELECTED WORKS
+                    {t('products.selectedWorks')}
                 </Typography>}
                 <Typography variant="h2" sx={{ mb: 2 }}>
-                    {title}
+                    {title === 'Products' ? t('products.title') : title === 'Explore All Products' ? t('products.exploreAll') : title}
                 </Typography>
                 {limit && <Typography variant='body2' color='text.secondary' sx={{ mb: 4 }}>
-                    Every object reflects precision finish and natural materiality.
+                    {t('products.description')}
                 </Typography>}
 
                 {showSearch && <TextField
                     fullWidth
-                    placeholder='Search products...'
+                    placeholder={t('products.searchPlaceholder')}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     sx={{ mb: 3 }}

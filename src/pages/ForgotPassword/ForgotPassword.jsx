@@ -8,9 +8,11 @@ import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { useTranslation } from 'react-i18next';
 
 export default function ForgotPassword() {
 
+  const { t } = useTranslation();
   const { register, handleSubmit, errors, isSubmitting, serverError, onsubmit } = useForgotPassword();
 
   return (
@@ -43,12 +45,11 @@ export default function ForgotPassword() {
             fontSize: { xs: '26px', md: '30px' },
             fontWeight: 'bold', textAlign: 'center', mb: 1
           }}>
-            Forgot Password?
+            {t('forgotPassword.title')}
           </Typography>
 
           <Typography sx={{ fontSize: '12px', color: 'natural.main', textAlign: 'center', lineHeight: 1.6, mb: 3 }}>
-            Enter the email address associated with your Kashop profile
-            to receive a password reset code.
+            {t('forgotPassword.description')}
           </Typography>
 
 
@@ -70,14 +71,14 @@ export default function ForgotPassword() {
               />
 
               <Typography sx={{ fontSize: '11px', color: 'natural.main' }}>
-                Protected via end-to-end 256-bit encrypted protocol.
+                {t('forgotPassword.securityNote')}
               </Typography>
             </Box>
 
             <Box sx={{ mt: 3 }}>
 
               <Typography sx={{ fontSize: '11px', fontWeight: 'bold', color: 'natural.main', mb: 1 }}>
-                EMAIL ADDRESS
+                {t('forgotPassword.email')}
               </Typography>
 
               <Box sx={{ position: 'relative' }}>
@@ -94,7 +95,7 @@ export default function ForgotPassword() {
                   }}
                 />
 
-                <TextField type="email" placeholder="e.g. lady.vivienne.claire@example.com"
+                <TextField type="email" placeholder={t('forgotPassword.emailPlaceholder')}
                   fullWidth size="small" {...register('email')}
                   error={!!errors.email} helperText={errors.email?.message}
                   sx={{
@@ -131,20 +132,20 @@ export default function ForgotPassword() {
               <InfoOutlinedIcon sx={{ fontSize: '15px', color: 'natural.main', mt: 0.2 }} />
 
               <Typography sx={{ fontSize: '11px', color: 'natural.main', lineHeight: 1.5 }}>
-                Instructions will only be dispatched if the address corresponds to an active patron registry.
+                {t('forgotPassword.accountNote')}
               </Typography>
             </Box>
 
             <CustomButton type="submit" fullWidth sx={{ mt: 2 }} disabled={isSubmitting} >
-              {isSubmitting ? "Sending..." : "Send Verification Code"}
+              {isSubmitting ? t('forgotPassword.sending') : t('forgotPassword.sendCode')}
             </CustomButton>
           </Box>
 
           <Box sx={{ mt: 5, textAlign: 'center' }}>
             <Typography sx={{ fontSize: '11px', color: 'natural.main', mb: 1 }}>
-              Remembered your credentials?{' '}
+              {t('forgotPassword.rememberCredentials')}{' '}
               <Box component={Link} to="/login" sx={{ color: 'primary.main', fontWeight: 600, textDecoration: 'none', fontSize: '11px' }}>
-                RETURN TO SIGN IN
+                {t('forgotPassword.backToLogin')}
               </Box>
             </Typography>
           </Box>

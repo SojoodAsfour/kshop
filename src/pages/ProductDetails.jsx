@@ -8,8 +8,10 @@ import useAddToCard from '../hooks/useAddToCard';
 import { useAuthStore } from '../store/useAuthStore';
 import { useNavigate } from 'react-router-dom';
 import { toast, Bounce } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 export default function ProductDetails() {
+    const { t } = useTranslation();
     const token = useAuthStore((state) => state.token);
     const navigate = useNavigate();
     const { id } = useParams();
@@ -27,7 +29,7 @@ export default function ProductDetails() {
     if (isError) {
         return (
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Alert severity="error">Error fetching Products</Alert>
+                <Alert severity="error">{t('products.errorFetching')}</Alert>
             </Box>
         )
     }
@@ -39,7 +41,7 @@ export default function ProductDetails() {
         }
         addToCart(data.id, {
             onSuccess: () => {
-                toast.success('Product added to cart!', {
+                toast.success(t('productDetails.addedSuccess'), {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -76,17 +78,17 @@ export default function ProductDetails() {
                 <Box>
                     <Typography variant='h5' component={'h2'}>{data?.name}</Typography>
                     <Rating value={data.rate} readOnly></Rating>
-                    <Typography color="primary" variant='h4'>Price: {data?.price}</Typography>
-                    <Chip label={inStock ? "In Stock" : "Out of Stock"} color={inStock ? "success" : "error"}>
+                    <Typography color="primary" variant='h4'>{t('products.price')}: {data?.price}</Typography>
+                    <Chip label={inStock ? t('products.inStock') : t('products.outOfStock')} color={inStock ? "success" : "error"}>
                     </Chip>
                     <Typography>{data?.description}</Typography>
                     <CustomButton variant="contained" color="primary" disabled={!inStock || addToCartPending}
                         onClick={handleAddToCart} sx={{ mt: 2 }}>
-                        Add to Cart
+                        {t('products.addToCart')}
                     </CustomButton>
                 </Box>
             </Box>
-            <Divider sx={{ mt: 4, color: 'primary.main', fontSize: 20, fontWeight: 'bold' }}>Reviews</Divider>
+            <Divider sx={{ mt: 4, color: 'primary.main', fontSize: 20, fontWeight: 'bold' }}>{t('products.reviews')}</Divider>
             {data.reviews.map((review) => (
                 <ReviewItem review={review} />
             ))}

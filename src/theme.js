@@ -85,7 +85,7 @@ const darkPalette = {
   },
 };
 
-export const getTheme = (mode) => {
+export const getTheme = (mode, dir) => {
   return createTheme({
     spacing: 8,
 
@@ -102,10 +102,14 @@ export const getTheme = (mode) => {
     palette: mode === 'light' ? lightPalette : darkPalette,
 
     typography: {
-      fontFamily: '"Montserrat", sans-serif',
+      fontFamily: dir === 'rtl'
+        ? '"Cairo", sans-serif'
+        : '"Montserrat", sans-serif',
 
       h1: {
-        fontFamily: '"Playfair Display", serif',
+        fontFamily: dir === 'rtl'
+          ? '"Cairo", sans-serif'
+          : '"Playfair Display", serif',
         fontSize: '3rem',
         fontWeight: 500,
         lineHeight: 1,
@@ -113,29 +117,39 @@ export const getTheme = (mode) => {
       },
 
       h2: {
-        fontFamily: '"Playfair Display", serif',
+        fontFamily: dir === 'rtl'
+          ? '"Cairo", sans-serif'
+          : '"Playfair Display", serif',
         fontSize: '2rem',
         fontWeight: 500,
       },
 
       h3: {
-        fontFamily: '"Playfair Display", serif',
+        fontFamily: dir === 'rtl'
+          ? '"Cairo", sans-serif'
+          : '"Playfair Display", serif',
         fontSize: '1.75rem',
         fontWeight: 500,
       },
 
       h4: {
-        fontFamily: '"Playfair Display", serif',
+        fontFamily: dir === 'rtl'
+          ? '"Cairo", sans-serif'
+          : '"Playfair Display", serif',
         fontWeight: 500,
       },
 
       h5: {
-        fontFamily: '"Playfair Display", serif',
+        fontFamily: dir === 'rtl'
+          ? '"Cairo", sans-serif'
+          : '"Playfair Display", serif',
         fontWeight: 500,
       },
 
       h6: {
-        fontFamily: '"Playfair Display", serif',
+        fontFamily: dir === 'rtl'
+          ? '"Cairo", sans-serif'
+          : '"Playfair Display", serif',
         fontWeight: 500,
       },
 

@@ -10,9 +10,11 @@ import Alert from '@mui/material/Alert';
 import useOTPVerification from '../../hooks/useOTPVerification';
 import AuthLeftSide from '../../components/ui/AuthLeftSide';
 import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
+import { useTranslation } from 'react-i18next';
 
 export default function OTPVerification({ email, newPassword, onBack }) {
 
+  const { t } = useTranslation();
   const { register, handleSubmit, errors, setValue, isSubmitting, serverError, success, onsubmit, handleClose } = useOTPVerification(email, newPassword, onBack);
   const [code, setCode] = useState(['', '', '', '']);
   const inputRefs = useRef([]);
@@ -44,11 +46,11 @@ export default function OTPVerification({ email, newPassword, onBack }) {
           </Box>
 
           <Typography component="h1" sx={{ fontSize: { xs: '26px', md: '30px' }, fontWeight: 'bold', textAlign: 'center', mb: 1 }} >
-            Verify Your Code
+            {t('otp.title')}
           </Typography>
 
           <Typography sx={{ fontSize: '12px', color: 'natural.main', textAlign: 'center', lineHeight: 1.7 }}>
-            Enter the 4-digit verification code sent to your email address.
+            {t('otp.description')}
           </Typography>
 
           <Typography sx={{ fontSize: '13px', fontWeight: 600, color: 'primary.main', textAlign: 'center', mt: 1, mb: 3 }}>
@@ -93,7 +95,7 @@ export default function OTPVerification({ email, newPassword, onBack }) {
                       maxLength: 1,
                       inputMode: 'numeric',
                       autoComplete: index === 0 ? 'one-time-code' : 'off',
-                      'aria-label': `Digit ${index + 1}`
+                      'aria-label': `${t('otp.digit')} ${index + 1}`
                     }
                   }}
                   sx={{
@@ -121,13 +123,13 @@ export default function OTPVerification({ email, newPassword, onBack }) {
 
 
             <CustomButton type="submit" fullWidth sx={{ mt: 2 }} disabled={isSubmitting}>
-              {isSubmitting ? "Verifying..." : "Verify Code"}
+              {isSubmitting ? t('otp.verifying') : t('otp.verify')}
             </CustomButton>
 
           </Box>
 
           <Button onClick={() => onBack("")} sx={{ mt: 2 }}>
-            Back to Reset Password
+            {t('otp.backToReset')}
           </Button>
           <Snackbar
             open={success}
@@ -136,7 +138,7 @@ export default function OTPVerification({ email, newPassword, onBack }) {
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
           >
             <Alert severity="success" variant="filled">
-              Password changed successfully!
+              {t('otp.passwordChanged')}
             </Alert>
 
           </Snackbar>
@@ -148,4 +150,3 @@ export default function OTPVerification({ email, newPassword, onBack }) {
     </Box>
   );
 }
-

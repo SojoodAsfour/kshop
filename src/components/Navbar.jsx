@@ -14,18 +14,20 @@ import BrandLogo from './ui/BrandLogo';
 import MenuIcon from '@mui/icons-material/Menu';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import { useTranslation } from 'react-i18next';
 
 const navLinks = [
-  { name: 'HOME', path: '/' },
-  { name: 'SHOP', path: '/shop' },
-  { name: 'CATEGORIES', path: '/categories' },
-  { name: 'ABOUT', path: '/about' },
-  { name: 'CONTACT', path: '/contact' }
+  { name: 'nav.home', path: '/' },
+  { name: 'nav.shop', path: '/shop' },
+  { name: 'nav.categories', path: '/categories' },
+  { name: 'nav.about', path: '/about' },
+  { name: 'nav.contact', path: '/contact' }
 ];
 
 export default function Navbar() {
 
-  const { token, logout, cartCount, toggleMode, mode } = useNavbar();
+  const { token, logout, cartCount, toggleMode, mode, language, toggleLanguage } = useNavbar();
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMenu, setMobileMenu] = useState(null);
 
@@ -39,7 +41,7 @@ export default function Navbar() {
     >
       <Toolbar sx={{ width: '100%', maxWidth: '1200px', mx: 'auto', px: { xs: 2, md: 3 }, minHeight: { xs: 60, md: 64 }, gap: 2 }}>
 
-        <IconButton onClick={(e) => setMobileMenu(e.currentTarget)} sx={{ display: { xs: 'flex', md: 'none' }, color: 'primary.main' }} aria-label="Open navigation menu">
+        <IconButton onClick={(e) => setMobileMenu(e.currentTarget)} sx={{ display: { xs: 'flex', md: 'none' }, color: 'primary.main' }} aria-label={t('nav.openMenu')}>
           <MenuIcon />
 
           <Menu anchorEl={mobileMenu} open={Boolean(mobileMenu)} onClose={() => setMobileMenu(null)}>
@@ -52,7 +54,7 @@ export default function Navbar() {
                     bgcolor: 'background.soft'
                   }
                 }}>
-                {link.name}
+                {t(link.name)}
               </MenuItem>
             ))}
           </Menu>
@@ -74,14 +76,14 @@ export default function Navbar() {
                   color: 'primary.main'
                 }
               }}>
-              {link.name}
+              {t(link.name)}
             </Button>
           ))}
         </Box>
 
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: { md: 1 }, ml: 'auto' }}>
-          <Tooltip title="Search">
+          <Tooltip title={t('nav.search')}>
             <IconButton component={Link} to="/shop" sx={{ color: 'text.primary' }}>
               <SearchIcon fontSize="small" />
             </IconButton>
@@ -99,7 +101,7 @@ export default function Navbar() {
                   logout();
                   setAnchorEl(null);
                 }}>
-                  Logout
+                  {t('nav.logout')}
                 </MenuItem>
               </Menu>
             </>
@@ -110,7 +112,8 @@ export default function Navbar() {
           )}
 
 
-          <Tooltip title="View cart">
+
+          <Tooltip title={t('nav.viewCart')}>
             <IconButton component={Link} to="/cart" sx={{ color: 'primary.main' }}>
               <Badge badgeContent={cartCount} color="primary">
                 <ShoppingBagOutlinedIcon fontSize="small" />
@@ -118,10 +121,16 @@ export default function Navbar() {
             </IconButton>
           </Tooltip>
 
-          <Tooltip title={mode === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}>
-            <IconButton onClick={toggleMode} sx={{ display: { xs: 'none', md: 'flex' }, color: 'primary.main' }} aria-label="Toggle theme mode">
+          <Tooltip title={mode === 'light' ? t('nav.darkMode') : t('nav.lightMode')}>
+            <IconButton onClick={toggleMode} sx={{ display: { xs: 'none', md: 'flex' }, color: 'primary.main' }} aria-label={t('nav.toggleTheme')}>
               {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
             </IconButton>
+          </Tooltip>
+
+          <Tooltip title={language === 'en' ? t('nav.switchToArabic') : t('nav.switchToEnglish')}>
+            <Button onClick={toggleLanguage} sx={{ display: { xs: 'none', md: 'flex' }, color: 'primary.main', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.14px' }}>
+              {t('nav.switchLanguage')}
+            </Button>
           </Tooltip>
         </Box>
       </Toolbar>

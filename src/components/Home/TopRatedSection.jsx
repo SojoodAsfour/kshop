@@ -1,22 +1,23 @@
-
 import React, { useState } from 'react'
 import { Box, Typography, Button } from '@mui/material';
 import { useProducts } from '../../hooks/UseProducts';
 import ProductCard from '../ui/ProductCard';
 import PageContainer from '../ui/PageContainer';
+import { useTranslation } from 'react-i18next';
 
 
 export default function TopRatedSection() {
+    const { t } = useTranslation();
     const { data, isPending, isError } = useProducts();
     const [fiveStarsOnly, setFiveStarsOnly] = useState(false);
 
     const topRatedProducts = data?.filter((product) => product.rate >= (fiveStarsOnly ? 5 : 4)).slice(0, 4) || [];
     if (isPending) {
-        return <Typography>Loading products...</Typography>
+        return <Typography>{t('topRated.loadingProducts')}</Typography>
     }
 
     if (isError) {
-        return <Typography color='error'>Error loading products</Typography>
+        return <Typography color='error'>{t('topRated.errorLoadingProducts')}</Typography>
     }
 
     return (
@@ -25,15 +26,15 @@ export default function TopRatedSection() {
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: { xs: 'flex-start', md: 'center' }, flexDirection: { xs: 'column', md: 'row' }, gap: 2, mb: 4 }}>
                     <Box>
                         <Typography variant='overline' color='primary'>
-                            COMMUNITY ACCLAIM
+                            {t('topRated.communityAcclaim')}
                         </Typography>
 
                         <Typography variant='h2' sx={{ fontSize: { xs: '1.6rem', md: '2rem' } }}>
-                            Top Rated Selections
+                            {t('topRated.title')}
                         </Typography>
 
                         <Typography variant='body2' color='text.secondary'>
-                            Acclaimed designs celebrated with the highest client appraisals.
+                            {t('topRated.description')}
                         </Typography>
                     </Box>
 
@@ -45,7 +46,7 @@ export default function TopRatedSection() {
                                 fontSize: '0.7rem', bgcolor: fiveStarsOnly ? 'secondary.main' : 'primary.main',
                                 color: fiveStarsOnly ? 'text.primary' : 'primary.contrastText'
                             }}>
-                            ALL 4+ STARS
+                            {t('topRated.allFourStars')}
                         </Button>
 
                         <Button variant={fiveStarsOnly ? 'contained' : 'text'}
@@ -56,7 +57,7 @@ export default function TopRatedSection() {
                                 bgcolor: fiveStarsOnly ? 'primary.main' : 'secondary.main',
                                 color: fiveStarsOnly ? 'primary.contrastText' : 'text.primary'
                             }}>
-                            5 STAR ONLY
+                            {t('topRated.fiveStarsOnly')}
                         </Button>
                     </Box>
                 </Box>
@@ -77,7 +78,7 @@ export default function TopRatedSection() {
                     </Box>
                 ) : (
                     <Typography color='text.secondary'>
-                        No products found with this rating.
+                        {t('topRated.noProductsFound')}
                     </Typography>
                 )}
             </PageContainer>

@@ -6,9 +6,11 @@ import useRemoveItemCart from '../../hooks/useRemoveItemCart';
 import { toast } from 'react-toastify';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import { useTranslation } from 'react-i18next';
 
 export default function CartItem({ item, image }) {
 
+  const { t } = useTranslation();
   const { mutate: updateCartItem, isPending } = useUpdateCartItem();
   const { mutate: removeItemCart, isPending: isRemovePending } = useRemoveItemCart();
   const handleIncrease = () => {
@@ -23,10 +25,10 @@ export default function CartItem({ item, image }) {
   const handleRemove = () => {
     removeItemCart(item.productId, {
       onSuccess: () => {
-        toast.success('Item removed from cart');
+        toast.success(t('cart.itemRemoved'));
       },
       onError: () => {
-        toast.error('Failed to remove item from cart');
+        toast.error(t('cart.removeError'));
       }
     });
   }
@@ -46,7 +48,7 @@ export default function CartItem({ item, image }) {
           </Typography>
 
           <Typography variant='body2' color='text.secondary'>
-            Single: {item.price}
+            {t('cart.single')}: {item.price}
           </Typography>
         </Box>
       </Box>
@@ -61,7 +63,7 @@ export default function CartItem({ item, image }) {
         </IconButton>
       </Box>
 
-      <Typography >Total: ${item.totalPrice}</Typography>
+      <Typography >{t('cart.total')}: ${item.totalPrice}</Typography>
 
       <IconButton onClick={handleRemove} disabled={isRemovePending}>
         <DeleteIcon />

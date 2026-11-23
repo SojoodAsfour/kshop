@@ -12,10 +12,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import WineBarIcon from '@mui/icons-material/WineBar';
 import VerifiedUserOutlinedIcon from '@mui/icons-material/VerifiedUserOutlined';
 import useLogin from '../../hooks/useLogin';
+import { useTranslation } from 'react-i18next';
 
 
 export default function Login() {
 
+  const { t } = useTranslation();
   const { register, handleSubmit, errors, isSubmitting, serverError, onsubmit } = useLogin();
 
   const inputStyle = {
@@ -70,12 +72,11 @@ export default function Login() {
 
         <Box>
           <Typography component="h1" sx={{ fontSize: { xs: '20px', md: '40px' }, fontWeight: 'bold', mt: { xs: 5, md: 10 }, maxWidth: '500px', lineHeight: 1.2 }}>
-            Curated Acquisitions Await.
+            {t('login.heading')}
           </Typography>
 
           <Typography sx={{ mt: 2, fontSize: { xs: '13px', md: '16px' }, lineHeight: 1.5, color: 'natural.main', maxWidth: '500px' }}>
-            Access your curated catalog selections, track active dispatches,
-            and manage your verified account preferences with quiet ease.
+            {t('login.description')}
           </Typography>
           <Box sx={{ display: 'flex', gap: 1, mt: 3, flexWrap: 'wrap' }}>
 
@@ -83,7 +84,7 @@ export default function Login() {
               <VerifiedUserOutlinedIcon sx={{ fontSize: 15, color: 'primary.main' }} />
 
               <Typography sx={{ fontSize: '10px' }}>
-                Discreet Account Protection
+                {t('login.accountProtection')}
               </Typography>
             </Box>
 
@@ -91,7 +92,7 @@ export default function Login() {
               <LockOutlinedIcon sx={{ fontSize: 15, color: 'primary.main' }} />
 
               <Typography sx={{ fontSize: '10px' }}>
-                Verified Protocols
+                {t('login.verifiedProtocols')}
               </Typography>
             </Box>
 
@@ -113,11 +114,11 @@ export default function Login() {
             </Box>
 
             <Typography variant="h1" component="h2" sx={{ fontSize: { xs: '28px', md: '34px' }, fontWeight: 'bold', mb: 1 }}>
-              Sign In
+              {t('login.title')}
             </Typography>
 
             <Typography sx={{ fontSize: '12px', color: 'text.secondary', lineHeight: 1.6 }}>
-              Enter your credentials to access your Kashop dossier
+              {t('login.subtitle')}
             </Typography>
 
           </Box>
@@ -127,7 +128,7 @@ export default function Login() {
           <Box component="form" onSubmit={handleSubmit(onsubmit)} noValidate>
             <Box sx={{ mt: 2 }}>
               <Typography sx={{ fontSize: '11px', fontWeight: 'bold', color: 'natural.main', mb: 1 }}>
-                EMAIL ADDRESS *
+                {t('login.email')} *
               </Typography>
               <Box sx={{ position: "relative" }}>
                 <EmailOutlinedIcon
@@ -141,13 +142,13 @@ export default function Login() {
                     pointerEvents: 'none'
                   }}
                 />
-                <TextField placeholder="e.g. lady.vivienne.claire@example.com" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('email')}
+                <TextField placeholder={t('login.emailPlaceholder')} sx={{ ...inputStyle, width: '100%' }} size="small" {...register('email')}
                   error={!!errors.email} helperText={errors.email?.message}></TextField>
               </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
               <Typography sx={{ fontSize: '11px', fontWeight: 'bold', color: 'natural.main', mb: 1 }}>
-                PASSWORD *
+                {t('login.password')} *
               </Typography>
               <Box sx={{ position: 'relative' }}>
                 <LockOutlinedIcon
@@ -161,7 +162,7 @@ export default function Login() {
                     pointerEvents: 'none'
                   }}
                 />
-                <TextField placeholder="Enter your password" sx={{ ...inputStyle, width: '100%' }} size="small" {...register('password')}
+                <TextField placeholder={t('login.passwordPlaceholder')} sx={{ ...inputStyle, width: '100%' }} size="small" {...register('password')}
                   error={!!errors.password} helperText={errors.password?.message} type='password'></TextField>
               </Box>
             </Box>
@@ -182,7 +183,7 @@ export default function Login() {
                   }
                 }} />
               }
-                label="Remember this device" sx={{
+                label={t('login.rememberDevice')} sx={{
                   m: 0,
                   '& .MuiFormControlLabel-label': {
                     fontSize: '11px',
@@ -191,17 +192,17 @@ export default function Login() {
                 }} />
 
               <Box component={Link} to="/forgot-password" sx={{ fontSize: '10px', fontWeight: 600, color: 'primary.main', textDecoration: 'none', letterSpacing: '0.5px', }}>
-                FORGOT PASSWORD?
+                {t('login.forgotPassword')}
               </Box>
 
             </Box>
 
             <CustomButton type="submit" fullWidth sx={{ mt: 2 }} disabled={isSubmitting}>
-              {isSubmitting ? "Signing In..." : "Sign In To Dossier →"}
+              {isSubmitting ? t('login.submitting') : t('login.submit')}
             </CustomButton>
 
             <Typography variant="body2" color="textSecondary" align="center" sx={{ mt: 2, fontFamily: 'Georgia, serif' }}>
-              New to Kashop?  <Box component={Link} to="/register" sx={{ color: 'primary.main', textDecoration: 'none', fontWeight: 600, }}>Create an Account</Box>
+              {t('login.newUser')}  <Box component={Link} to="/register" sx={{ color: 'primary.main', textDecoration: 'none', fontWeight: 600, }}>{t('login.createAccount')}</Box>
             </Typography>
 
           </Box>

@@ -3,22 +3,26 @@ import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import PageContainer from '../ui/PageContainer';
 import CustomButton from '../ui/CustomButton';
+import { useTranslation } from 'react-i18next';
 
 export default function ManifestoSection() {
+
+    const { t } = useTranslation();
+
     return (
         <Box component='section' sx={{ bgcolor: 'primary.main', py: { xs: 7, md: 10 }, textAlign: 'center' }}>
             <PageContainer>
 
                 <Typography variant='overline' sx={{ color: 'primary.contrastText', fontSize: '0.65rem' }}>
-                    OUR MANIFEST
+                    {t('manifesto.ourManifest')}
                 </Typography>
 
                 <Typography variant='h2' sx={{ color: 'primary.contrastText', fontSize: { xs: '2rem', md: '3rem' }, maxWidth: 850, mx: 'auto', mt: 1, mb: 3 }}>
-                    Timeless simplicity, thoughtfully engineered for your living space.
+                    {t('manifesto.title')}
                 </Typography>
 
                 <Typography variant='body2' sx={{ color: 'primary.contrastText', maxWidth: 600, mx: 'auto', lineHeight: 1.8, mb: 4 }}>
-                    We eliminate fleeting trends in pursuit of balanced proportion, deliberate utility, and enduring tactile joy.
+                    {t('manifesto.description')}
                 </Typography>
 
                 <CustomButton component={Link} to='/shop' variant='outlined' color='inherit' fullWidth={false}
@@ -31,7 +35,7 @@ export default function ManifestoSection() {
                             bgcolor: 'primary.dark'
                         }
                     }}>
-                    START SHOPPING
+                    {t('manifesto.startShopping')}
                 </CustomButton>
 
             </PageContainer>

@@ -16,17 +16,19 @@ import { useState } from 'react';
 import ConfirmDialog from '../../components/ui/ConfirmDialog';
 import { useProducts } from '../../hooks/UseProducts';
 import PageContainer from '../../components/ui/PageContainer';
+import { useTranslation } from 'react-i18next';
 
 export default function Cart() {
+    const { t } = useTranslation();
     const { mutate: clearCart, isPending: isClearing } = useClearCart();
 
     const handleClearCart = () => {
         clearCart(undefined, {
             onSuccess: () => {
-                toast.success('Cart cleared successfully');
+                toast.success(t('cart.clearSuccess'));
                 setOpenConfirm(false);
             },
-            onError: () => toast.error('Failed to clear cart')
+            onError: () => toast.error(t('cart.clearError'))
         });
     }
 
@@ -40,10 +42,10 @@ export default function Cart() {
         return (
             <Box>
                 <Typography variant='h5' sx={{ textAlign: 'center', mt: 5 }}>
-                    Please login to view your cart
+                    {t('cart.loginRequired')}
                 </Typography>
                 <CustomButton variant='contained' sx={{ display: 'block', mx: 'auto', mt: 2 }} onClick={() => navigate('/login')}>
-                    Login
+                    {t('nav.login')}
                 </CustomButton>
             </Box>
         )
@@ -55,7 +57,7 @@ export default function Cart() {
 
     if (isError) {
         return (
-            <Alert severity="error">Error fetching cart data</Alert>
+            <Alert severity="error">{t('cart.fetchError')}</Alert>
         )
     }
 
@@ -63,9 +65,9 @@ export default function Cart() {
         return (
             <Box>
                 <Typography>
-                    Your cart is empty! shop now to add items to your cart.
+                    {t('cart.emptyMessage')}
                     <CustomButton variant='contained' sx={{ display: 'block', mx: 'auto', mt: 2 }} onClick={() => navigate('/home')}>
-                        Home
+                        {t('nav.home')}
                     </CustomButton>
                 </Typography>
             </Box>
@@ -78,18 +80,18 @@ export default function Cart() {
                 open={openConfirm}
                 onClose={() => setOpenConfirm(false)}
                 onConfirm={handleClearCart}
-                title='Clear Shopping Bag'
-                message='Are you sure you want to remove all items from your cart?'
+                title={t('cart.clearTitle')}
+                message={t('cart.clearMessage')}
                 isPending={isClearing}
             />
             <PageContainer>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
                     <Typography variant='h1' sx={{ fontSize: { xs: '1.5rem', md: '2rem' } }}>
-                        Your Shopping Bag
+                        {t('cart.shoppingBag')}
                     </Typography>
 
                     <Button onClick={() => setOpenConfirm(true)} disabled={isClearing} sx={{ color: 'primary.main', fontSize: '0.75rem' }}>
-                        Clear Bag
+                        {t('cart.clearBag')}
                     </Button>
                 </Box>
                 <Box sx={{

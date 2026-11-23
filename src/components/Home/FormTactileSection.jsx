@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 import PageContainer from '../ui/PageContainer';
 import CustomButton from '../ui/CustomButton';
 import { useProducts } from '../../hooks/UseProducts';
+import { useTranslation } from 'react-i18next';
 
 export default function FormTactileSection() {
+
+    const { t } = useTranslation();
 
     const { data: products } = useProducts();
 
@@ -23,29 +26,29 @@ export default function FormTactileSection() {
 
                     <Box>
                         <Typography variant='overline' color='primary'>
-                            EDITORIAL DISCOURSE
+                            {t('formTactile.editorialDiscourse')}
                         </Typography>
 
                         <Typography variant='h2' sx={{ mb: 2 }}>
-                            Form & Tactile Finish
+                            {t('formTactile.title')}
                         </Typography>
 
                         <Typography variant='body2' color='text.secondary' sx={{ lineHeight: 1.8, mb: 2 }}>
-                            Our atelier embraces raw clays, brushed brass, and honed quartz. Each artifact invites touch, offering quiet elegance that elevates the rituals of everyday domesticity.
+                            {t('formTactile.description')}
                         </Typography>
 
                         <Box sx={{ bgcolor: 'background.paper', p: 2, borderRadius: 2, mb: 3 }}>
                             <Typography sx={{ fontFamily: '"Playfair Display", serif', fontStyle: 'italic', mb: 1 }}>
-                                "Beauty without ostentation, purpose without compromise."
+                                {t('formTactile.quote')}
                             </Typography>
 
                             <Typography variant='caption' color='text.secondary'>
-                                KASHOP DESIGN PHILOSOPHY
+                                {t('formTactile.philosophy')}
                             </Typography>
                         </Box>
 
                         <CustomButton component={Link} to='/shop' fullWidth={false} sx={{ px: 3, py: 1 }}>
-                            BROWSE ALL PRODUCTS
+                            {t('formTactile.browseProducts')}
                         </CustomButton>
                     </Box>
 

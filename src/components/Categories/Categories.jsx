@@ -6,10 +6,12 @@ import CategoryItem from '../ui/CategoryItem';
 import PageContainer from '../ui/PageContainer';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 export default function Categories({ title = 'Categories', showViewAll = false }) {
 
     const { data, isPending, isError } = useCategories();
+    const {t} = useTranslation();
 
     if (isPending) {
         return (
@@ -21,7 +23,7 @@ export default function Categories({ title = 'Categories', showViewAll = false }
     if (isError) {
         return (
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Alert severity="error">Error fetching categories</Alert>
+                <Alert severity="error">{t('categories.fetchError')}</Alert>
             </Box>
         )
     }
@@ -33,21 +35,21 @@ export default function Categories({ title = 'Categories', showViewAll = false }
                     <Box sx={{display: 'flex',justifyContent: 'space-between', alignItems: { xs: 'flex-start', md: 'flex-end' }, flexDirection: { xs: 'column', md: 'row' }, gap: 2,mb: 3}}>
                         <Box>
                             <Typography variant="overline" sx={{ color: 'primary.main', fontSize: '0.65rem',fontWeight: 600}}>
-                                STRUCTURED CURATION
+                                {t('categories.structuredCuration')}
                             </Typography>
 
                             <Typography variant="h2" sx={{fontSize: { xs: '1.6rem', md: '2rem' }, mb: 0.5}}>
-                                {title}
+                                {title === 'Categories' ? t('categories.title') : title}
                             </Typography>
 
                             <Typography variant="body2" color="text.secondary">
-                                Explore our structured selections crafted for every room.
+                                {t('categories.description')}
                             </Typography>
                         </Box>
 
                         {showViewAll && (
                             <Button component={Link} to="/categories" sx={{ color: 'primary.main',fontSize: '0.75rem'}}>
-                                VIEW ALL CATEGORIES →
+                                {t('home.viewAll')} →
                             </Button>
                         )}
                     </Box>

@@ -7,17 +7,19 @@ import HeroSection from '../../components/Home/HeroSection';
 import FormTactileSection from '../../components/Home/FormTactileSection';
 import ManifestoSection from '../../components/Home/ManifestoSection';
 import TopRatedSection from '../../components/Home/TopRatedSection';
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
   const token = useAuthStore((state) => state.token);
+  const { t } = useTranslation();
   return (
    <>
    {
-    token ? <Alert severity="success">Welcome Back!</Alert>: <Alert severity="info">Please login to access more features.</Alert>
+    token ? <Alert severity="success">{t('home.welcomeBack')}</Alert>: <Alert severity="info">{t('home.loginNotice')}</Alert>
    }
       <HeroSection />
-      <Categories title="Shop by Category" showViewAll/>
-      <Products title="Curated Essentials" limit={4}/>
+      <Categories title={t('home.shopByCategory')} showViewAll/>
+      <Products title={t('home.curatedEssentials')} limit={4}/>
       <FormTactileSection />
       <ManifestoSection />
       <TopRatedSection />

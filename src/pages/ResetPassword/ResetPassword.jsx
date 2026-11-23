@@ -12,9 +12,11 @@ import axios from 'axios';
 import { resetPasswordSchema } from '../../validations/authSchemas';
 import CustomButton from '../../components/ui/CustomButton';
 import OTPVerification from '../OTPVerification/OTPVerification';
+import { useTranslation } from 'react-i18next';
 
 export default function ResetPassword() {
 
+  const { t } = useTranslation();
   const location = useLocation();
   const email = location.state?.email;
 
@@ -51,7 +53,7 @@ export default function ResetPassword() {
     <Box sx={{ maxWidth: '450px', mx: 'auto', mt: 5, p: 3 }}>
 
       <Typography variant="h4">
-        Reset Your Password
+        {t('resetPassword.title')}
       </Typography>
       
       <Typography color="error">
@@ -59,23 +61,23 @@ export default function ResetPassword() {
       </Typography>
 
       <Typography sx={{ mt: 2 }}>
-        Enter your new password below.
+        {t('resetPassword.description')}
       </Typography>
 
       <Box component="form" onSubmit={handleSubmit(onsubmit)} noValidate>
 
-        <TextField label="New Password" type="password" fullWidth margin="normal" {...register('newPassword')} error={!!errors.newPassword} helperText={errors.newPassword?.message} />
-        <TextField label="Confirm Password" type="password" fullWidth margin="normal" {...register('confirmPassword')} error={!!errors.confirmPassword} helperText={errors.confirmPassword?.message} />
+        <TextField label={t('resetPassword.newPassword')} type="password" fullWidth margin="normal" {...register('newPassword')} error={!!errors.newPassword} helperText={errors.newPassword?.message} />
+        <TextField label={t('resetPassword.confirmPassword')} type="password" fullWidth margin="normal" {...register('confirmPassword')} error={!!errors.confirmPassword} helperText={errors.confirmPassword?.message} />
 
         <CustomButton type="submit" fullWidth sx={{ mt: 2 }}>
-          Continue
+          {t('resetPassword.continue')}
         </CustomButton>
 
       </Box>
 
       <Typography sx={{ mt: 2, textAlign: 'center' }}>
         <Link to="/forgot-password">
-          Back to Forgot Password
+          {t('resetPassword.backToForgotPassword')}
         </Link>
       </Typography>
 

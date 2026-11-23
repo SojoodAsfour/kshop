@@ -6,10 +6,12 @@ import useAddToCard from '../../hooks/useAddToCard';
 import CustomButton from './CustomButton';
 import { Box } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { useTranslation } from 'react-i18next';
 
 
 export default function ProductCard({ product }) {
     const { mutate: addToCart, isPending } = useAddToCard();
+    const { t } = useTranslation();
     console.log(product);
     return (
         <>
@@ -33,7 +35,7 @@ export default function ProductCard({ product }) {
                     <CardContent sx={{ p: 2}}>
                         <Box sx={{display: 'flex',justifyContent: 'space-between', alignItems: 'center', mb: 0.5}}>
                             <Typography variant='caption' color='text.secondary' sx={{ fontSize: '0.65rem' }}>
-                                PRODUCT #{product.id}
+                                {t('products.productNumber')} #{product.id}
                             </Typography>
                             <Rating value={product.rate} readOnly size='small' />
                         </Box>
@@ -56,7 +58,7 @@ export default function ProductCard({ product }) {
                         }
                     }}>
                         <ShoppingCartOutlinedIcon sx={{ fontSize: 16, mr: 1 }} />
-                        ADD TO CART
+                        {t('products.addToCart')}
                     </CustomButton>
                 </Box>
             </Card>

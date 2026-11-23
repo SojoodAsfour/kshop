@@ -1,7 +1,10 @@
+
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 export default function AuthLeftSide() {
+    const { t } = useTranslation();
     return (
         <Box sx={{
             width: { xs: '100%', md: '50%' },
@@ -29,7 +32,7 @@ export default function AuthLeftSide() {
             </Typography>
 
             <Typography sx={{ fontSize: '9px', letterSpacing: '3px', mt: 0.5 }}>
-                MAISON DE COMMERCE
+                {t('common.maisonDeCommerce')}
             </Typography>
         </Box>
     );
